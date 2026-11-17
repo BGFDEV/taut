@@ -1,0 +1,106 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: gofmt
+        run: test -z "$(gofmt -l cmd internal)" || (gofmt -l cmd internal; exit 1)
+      - name: go mod tidy is clean
+        run: go mod tidy && git diff --exit-code go.mod go.sum
+      - uses: golangci/golangci-lint-action@v8
+        with:
+          version: v2.15.0
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - run: go vet ./...
+      - name: Start Postgres, S3 and NATS for integration tests
+        run: make test-services
+      - name: Test, including the kill-and-resume import tests
+        run: ./scripts/test-all.sh -coverprofile=coverage.out
+      - name: End-to-end against fixtures and the fake Graph
+        run: make demo
+
+  stack:
+    # The real binaries in containers: import a fixture, then import again
+    # while killing worker containers, and check nothing is duplicated.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - run: make up
+      - run: make migrate-demo
+      - run: make kill-test
+      - if: failure()
+        run: docker compose -f deploy/compose/compose.yaml logs --no-color | tail -n 300
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - run: make build
+      - run: ./bin/taut --version
+
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+      - name: Build image (no push)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: false
+          tags: taut:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Compose file is valid
+        env:
+          TAUT_STAGING_KEY: not-a-key-only-validating-the-file
+        run: docker compose -f deploy/compose/compose.yaml config -q
+
+  helm:
+    # Lint the chart, render it under every supported value set, validate the
+    # output against the Kubernetes schemas and assert that only the token
+    # broker can read a credential.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - uses: azure/setup-helm@v4
+      - name: PyYAML for the render assertions
+        run: python3 -c 'import yaml' || python3 -m pip install --user pyyaml
+      - run: make helm-lint
+      - name: The default render is printable
+        run: make helm-template > /dev/null

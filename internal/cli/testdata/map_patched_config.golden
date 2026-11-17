@@ -1,0 +1,32 @@
+# Hand-written plan.
+apiVersion: taut.dev/v1alpha1
+kind: Config
+metadata: {name: acme}
+source:
+  slack:
+    export: export.zip # from the March export
+target:
+  entra:
+    tenantId: 7f3c1e9a-52d4-4b1e-9a57-0c8f2d6e4b10
+    clientId: 2b9d4c1f-8e3a-4f6b-b7c2-5a1e0d9f3c84
+    credential:
+      clientSecret: {env: TAUT_ENTRA_CLIENT_SECRET}
+  teams:
+    - name: Acme
+      owner: admin@acme.example
+      channels:
+        include:
+          - "*"
+        exclude:
+          - tmp-* # scratch channels
+          - sales-*
+          - design
+        rename:
+          dev: Platform # their choice
+    # the second team is written compactly
+    - name: Sales
+      owner: admin@acme.example
+      channels: {include: [sales-*, design], exclude: [sales-emea], rename: {design: Studio}}
+identity:
+  unmapped:
+    account: former@acme.example

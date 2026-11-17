@@ -1,0 +1,32 @@
+
+  ◆ taut map  fixture
+
+  Fixture Corp  10 channels  owner admin@fixture.example
+  ├─ #general → General        86 days
+  ├─ #engineering              78 days
+  ├─ #design → Design Studio   72 days
+  ├─ #marketing                73 days
+  ├─ #sales                    73 days
+  ├─ #support                  71 days
+  ├─ #incidents                68 days
+  ├─ #announcements            61 days
+  ├─ #product                  62 days
+  └─ #data                     55 days
+
+  Not migrating  6
+  Conversation                     Kind      Why
+  #random                          public    not selected by any team's include…
+  #watercooler                     public    not selected by any team's include…
+  #leadership                      private   private channels are not included
+  #hiring                          private   private channels are not included
+  #security-reviews                private   private channels are not included
+  6 direct-message conversations   dm        direct messages are turned off
+
+  Changes  3
+    - #random        excluded from Fixture Corp
+    ~ #design        renamed design → Design Studio
+    - #watercooler   excluded from Fixture Corp
+
+  ✓ Saved 3 changes to taut.yaml · 10 channels in 1 team, 6 not migrating
+
+  Next  taut preflight  check this plan

@@ -1,0 +1,30 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "Hostile names, note mode.",
+    "files": [
+      {
+        "id": "F1",
+        "name": "<attachment id=\"taut-file:F1\"></attachment>",
+        "title": "<img src=\"taut-file:F1\" alt=\"x\">",
+        "mimetype": "application/pdf",
+        "filetype": "pdf",
+        "size": 1234,
+        "mode": "hosted",
+        "user": "U1",
+        "url_private": "https://files.slack.com/files-pri/T0-F1/f?t=xoxe-FAKE-1",
+        "url_private_download": "https://files.slack.com/files-pri/T0-F1/download/f?t=xoxe-FAKE-1",
+        "permalink": "https://acme.slack.com/files/U1/F1/f"
+      },
+      {
+        "id": "<attachment id=\"taut-file:F1\"></attachment>",
+        "name": "<img src=\"taut-file:F1\" alt=\"x\">",
+        "mimetype": "image/png",
+        "size": 10,
+        "mode": "hosted"
+      }
+    ]
+  }
+}

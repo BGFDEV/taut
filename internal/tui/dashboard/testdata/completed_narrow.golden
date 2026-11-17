@@ -1,0 +1,24 @@
+ ◆ taut dashboard                                                acme-migration
+ ──────────────────────────────────────────────────────────────────────────────
+ ✓ Import complete · run 01JCM4Q8 · 43m 4s elapsed · 13 failed · 2 held
+ Posts  ━━━━━━━━━━━━━━━━━━━━━━━━  100%  36,720 of 36,720
+ Files  ━━━━━━━━━━━━━━━━━━━━━━━━  100%  759 of 759
+ Stages  ✓ plan 1/1   ✓ extract 8/8   ✓ transform 8/8   ✓ team 2/2
+         ✓ files 8/8   ✓ load 8/8
+
+  Channels  8 · 8 done                                      by state · 1-6 of 8
+     channel           imported               posts    files
+ Engineering  5 channels, 5 done
+   ✓ #archive-2019     ───────     —              —        —
+   ✓ #deploys          ━━━━━━━  100%    6,100/6,100    12/12
+   ✓ #general          ━━━━━━━  100%  18,400/18,400  240/240
+   ! #incidents        ━━━━━━━  100%    2,204/2,210    64/64  4 failed · 2 held
+   ✓ #random           ━━━━━━━  100%    3,020/3,020    88/88
+ Sales  3 channels, 3 done
+   ✓ #leads            ━━━━━━━  100%    4,800/4,800  310/310
+
+  Cluster  0 workers
+
+  Problems  none
+ ──────────────────────────────────────────────────────────────────────────────
+ ↑/↓ scroll · / filter · o sort by name · tab next pane · ? help · q quit

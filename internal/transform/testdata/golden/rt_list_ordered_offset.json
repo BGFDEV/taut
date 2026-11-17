@@ -1,0 +1,77 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "rich_text",
+        "block_id": "b1",
+        "elements": [
+          {
+            "type": "rich_text_list",
+            "style": "ordered",
+            "indent": 0,
+            "border": 0,
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "one"
+                  }
+                ]
+              },
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "two"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "text",
+                "text": "interruption"
+              }
+            ]
+          },
+          {
+            "type": "rich_text_list",
+            "style": "ordered",
+            "indent": 0,
+            "border": 0,
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "three"
+                  }
+                ]
+              },
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "four"
+                  }
+                ]
+              }
+            ],
+            "offset": 2
+          }
+        ]
+      }
+    ]
+  }
+}

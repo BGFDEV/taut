@@ -1,0 +1,65 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "rich_text",
+        "block_id": "b1",
+        "elements": [
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "broadcast",
+                "range": "here"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "broadcast",
+                "range": "channel"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "broadcast",
+                "range": "everyone"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "broadcast",
+                "range": "<b>"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "usergroup",
+                "usergroup_id": "S0FXENG001"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "usergroup",
+                "usergroup_id": "S0FXENG001",
+                "fallback": "@eng"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

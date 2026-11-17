@@ -1,0 +1,24 @@
+ ◆ taut dashboard                                                acme-migration
+ ──────────────────────────────────────────────────────────────────────────────
+ ⠋ Waiting for the first snapshot from the controller
+
+ ✗ Something unexpected went wrong
+   dial tcp 127.0.0.1:7070: connect: connection refused
+   └ Run taut doctor to check your environment, then retry with --verbose.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ──────────────────────────────────────────────────────────────────────────────
+ ↑/↓ scroll · / filter · o sort by name · tab next pane · ? help · q quit

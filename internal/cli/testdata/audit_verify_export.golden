@@ -1,0 +1,9 @@
+
+  ◆ taut audit  fixture
+
+  ✓ Exported 2 entries · csv · 521 bytes
+
+  File       verified.csv
+  SHA-256    c34a6ee7c613cd032a6a4b65963aadc5f38d727f4366e6f7b51f8c3c0f24a6f2
+  Run        run-2026-11-14-a1b2c3
+  Verified   every hash chain was intact before the export

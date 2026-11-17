@@ -1,0 +1,24 @@
+ ◆ taut preflight ❯ Overview                                     acme-migration
+ ──────────────────────────────────────────────────────────────────────────────
+
+
+
+
+
+
+
+   ╭───────────────────────────────────────────────────────────────────────╮
+   │ ✗ Microsoft Graph rejected the credentials                            │
+   │   The certificate is not registered on the app registration.          │
+   │   └ Run taut auth to re-check, or upload the certificate in the Entra │
+   │     portal.                                                           │
+   ╰───────────────────────────────────────────────────────────────────────╯
+
+
+
+
+
+
+
+ ──────────────────────────────────────────────────────────────────────────────
+ enter dismiss · q quit

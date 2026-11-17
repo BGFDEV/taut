@@ -1,0 +1,9 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "subtype": "taut_fixture_unknown_subtype",
+    "text": "A subtype nobody has seen before."
+  }
+}

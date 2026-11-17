@@ -1,0 +1,16 @@
+/bin/
+/dist/
+/testdata/fixtures/*.zip
+/testdata/loadtest/
+*.test
+*.out
+coverage.*
+.env
+.env.*
+!.env.example
+*.pem
+*.pfx
+*.key
+taut.yaml
+.DS_Store
+deploy/compose/.env

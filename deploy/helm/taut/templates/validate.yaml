@@ -1,0 +1,2 @@
+{{- /* Renders nothing; stops the render when the values are unusable. */ -}}
+{{- include "taut.validate" . -}}

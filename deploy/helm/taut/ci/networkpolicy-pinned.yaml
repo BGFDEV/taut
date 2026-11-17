@@ -1,0 +1,21 @@
+# Every dependency pinned to where it is: in the cluster, on a private
+# address, behind a selector. None of the rules falls back to "public".
+networkPolicy:
+  dns:
+    to:
+      - namespaceSelector: { matchLabels: { kubernetes.io/metadata.name: kube-system } }
+        podSelector: { matchLabels: { k8s-app: kube-dns } }
+  postgres:
+    to:
+      - ipBlock: { cidr: 10.0.5.10/32 }
+  nats:
+    to:
+      - namespaceSelector: { matchLabels: { kubernetes.io/metadata.name: nats } }
+  s3:
+    to:
+      - ipBlock: { cidr: 10.0.6.0/24 }
+  otlp:
+    to:
+      - podSelector: { matchLabels: { app: otel-collector } }
+telemetry:
+  endpoint: otel-collector:4317

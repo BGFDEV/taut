@@ -1,0 +1,50 @@
+{{- $np := .Values.networkPolicy }}
+{{- if and $np.enabled $np.cilium.enabled }}
+{{- $hosts := dict
+  "global"    (list "login.microsoftonline.com" "graph.microsoft.com" "*.sharepoint.com")
+  "usgov"     (list "login.microsoftonline.com" "graph.microsoft.com" "*.sharepoint.com")
+  "usgovhigh" (list "login.microsoftonline.us" "graph.microsoft.us" "*.sharepoint.us")
+  "dod"       (list "login.microsoftonline.us" "dod-graph.microsoft.us" "*.sharepoint.us")
+  "china"     (list "login.partner.microsoftonline.cn" "microsoftgraph.chinacloudapi.cn" "*.sharepoint.cn") }}
+# Worker pods may open TLS connections only to the Microsoft cloud they are
+# pinned to and to Slack, by name. This replaces the CIDR rule of the plain
+# NetworkPolicy, which is omitted when networkPolicy.cilium.enabled is true.
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ include "taut.fullname" . }}-worker-fqdn
+  labels:
+    {{- include "taut.labels" (dict "root" . "component" "worker") | nindent 4 }}
+spec:
+  endpointSelector:
+    matchLabels:
+      {{- include "taut.selectorLabels" (dict "root" . "component" "worker") | nindent 6 }}
+  egress:
+    # Let Cilium's DNS proxy see the lookups, so it can learn the addresses.
+    - toEndpoints:
+        - matchLabels:
+            {{- toYaml $np.cilium.dnsSelector | nindent 12 }}
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: ANY
+          rules:
+            dns:
+              - matchPattern: "*"
+    - toFQDNs:
+        {{- range (index $hosts .Values.entra.cloud) }}
+        - {{ ternary "matchPattern" "matchName" (contains "*" .) }}: {{ . | quote }}
+        {{- end }}
+        - matchName: slack.com
+        - matchName: files.slack.com
+        - matchPattern: "*.slack-files.com"
+        {{- with $np.cilium.extraFQDNs }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      toPorts:
+        - ports:
+            {{- range $np.workerExternalEgress.ports }}
+            - port: {{ . | quote }}
+              protocol: TCP
+            {{- end }}
+{{- end }}

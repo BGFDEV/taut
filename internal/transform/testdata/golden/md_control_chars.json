@@ -1,0 +1,8 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "a\u0000b\u0007c\r\nd\u001b[31m e f\ttab lone\rcr <https://e.example/\u0000x|l\u0001abel>"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "<https://e.example/x|&lt;attachment id=\"taut-file:F1\"&gt;&lt;/attachment&gt;> <taut-file:F1> <taut-file:F1|label> <https://e.example/taut-file:F1> <https://e.example/?a=\"&gt;&lt;img src=\"taut-file:F1\" alt=\"x|img> <mailto:taut-file:F1> <@U6> <@U0NOPE|&lt;attachment id=\"taut-file:F1\"&gt;&lt;/attachment&gt;> <#C3> <#C0NOPE|&lt;img src=\"taut-file:F1\" alt=\"x\"&gt;>"
+  },
+  "options": {
+    "file_mode": "attach",
+    "inline_image_max": 100000
+  }
+}

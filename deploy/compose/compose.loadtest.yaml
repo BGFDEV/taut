@@ -1,0 +1,167 @@
+# Additions to the local stack for `make load-test` (scripts/load-test.sh).
+# Not used by `make up`.
+#
+#   docker compose -f compose.yaml -f compose.loadtest.yaml --profile w8 up -d
+#
+# It changes three things about the stack and adds workers:
+#
+#   postgres    loads pg_stat_statements, so the report can name the
+#               statements the time went into, and allows more connections
+#   telemetry   keeps metrics and drops traces: printing every span of a
+#               large import to the collector's log would measure the log
+#   workers     c and d with the profile w4, c to h with w8, each a pod of
+#               three like a and b
+
+services:
+  postgres:
+    command:
+      - postgres
+      - -c
+      - shared_preload_libraries=pg_stat_statements
+      - -c
+      - pg_stat_statements.track=top
+      - -c
+      - max_connections=300
+
+  telemetry:
+    volumes: ["./otel-collector.loadtest.yaml:/etc/otelcol/config.yaml:ro"]
+
+  worker-c:
+    extends: { file: compose.yaml, service: worker-a }
+    profiles: [w4, w8]
+    environment:
+      TAUT_PROXY_URL: http://egress-proxy-c:8900
+    depends_on:
+      controller: { condition: service_healthy }
+      egress-proxy-c: { condition: service_started }
+
+  egress-proxy-c:
+    extends: { file: compose.yaml, service: egress-proxy-a }
+    profiles: [w4, w8]
+    volumes: [token-broker-c:/home/nonroot]
+    depends_on:
+      token-broker-c: { condition: service_started }
+      nats: { condition: service_healthy }
+
+  token-broker-c:
+    extends: { file: compose.yaml, service: token-broker-a }
+    profiles: [w4, w8]
+    volumes: [token-broker-c:/home/nonroot]
+
+  worker-d:
+    extends: { file: compose.yaml, service: worker-a }
+    profiles: [w4, w8]
+    environment:
+      TAUT_PROXY_URL: http://egress-proxy-d:8900
+    depends_on:
+      controller: { condition: service_healthy }
+      egress-proxy-d: { condition: service_started }
+
+  egress-proxy-d:
+    extends: { file: compose.yaml, service: egress-proxy-a }
+    profiles: [w4, w8]
+    volumes: [token-broker-d:/home/nonroot]
+    depends_on:
+      token-broker-d: { condition: service_started }
+      nats: { condition: service_healthy }
+
+  token-broker-d:
+    extends: { file: compose.yaml, service: token-broker-a }
+    profiles: [w4, w8]
+    volumes: [token-broker-d:/home/nonroot]
+
+  worker-e:
+    extends: { file: compose.yaml, service: worker-a }
+    profiles: [w8]
+    environment:
+      TAUT_PROXY_URL: http://egress-proxy-e:8900
+    depends_on:
+      controller: { condition: service_healthy }
+      egress-proxy-e: { condition: service_started }
+
+  egress-proxy-e:
+    extends: { file: compose.yaml, service: egress-proxy-a }
+    profiles: [w8]
+    volumes: [token-broker-e:/home/nonroot]
+    depends_on:
+      token-broker-e: { condition: service_started }
+      nats: { condition: service_healthy }
+
+  token-broker-e:
+    extends: { file: compose.yaml, service: token-broker-a }
+    profiles: [w8]
+    volumes: [token-broker-e:/home/nonroot]
+
+  worker-f:
+    extends: { file: compose.yaml, service: worker-a }
+    profiles: [w8]
+    environment:
+      TAUT_PROXY_URL: http://egress-proxy-f:8900
+    depends_on:
+      controller: { condition: service_healthy }
+      egress-proxy-f: { condition: service_started }
+
+  egress-proxy-f:
+    extends: { file: compose.yaml, service: egress-proxy-a }
+    profiles: [w8]
+    volumes: [token-broker-f:/home/nonroot]
+    depends_on:
+      token-broker-f: { condition: service_started }
+      nats: { condition: service_healthy }
+
+  token-broker-f:
+    extends: { file: compose.yaml, service: token-broker-a }
+    profiles: [w8]
+    volumes: [token-broker-f:/home/nonroot]
+
+  worker-g:
+    extends: { file: compose.yaml, service: worker-a }
+    profiles: [w8]
+    environment:
+      TAUT_PROXY_URL: http://egress-proxy-g:8900
+    depends_on:
+      controller: { condition: service_healthy }
+      egress-proxy-g: { condition: service_started }
+
+  egress-proxy-g:
+    extends: { file: compose.yaml, service: egress-proxy-a }
+    profiles: [w8]
+    volumes: [token-broker-g:/home/nonroot]
+    depends_on:
+      token-broker-g: { condition: service_started }
+      nats: { condition: service_healthy }
+
+  token-broker-g:
+    extends: { file: compose.yaml, service: token-broker-a }
+    profiles: [w8]
+    volumes: [token-broker-g:/home/nonroot]
+
+  worker-h:
+    extends: { file: compose.yaml, service: worker-a }
+    profiles: [w8]
+    environment:
+      TAUT_PROXY_URL: http://egress-proxy-h:8900
+    depends_on:
+      controller: { condition: service_healthy }
+      egress-proxy-h: { condition: service_started }
+
+  egress-proxy-h:
+    extends: { file: compose.yaml, service: egress-proxy-a }
+    profiles: [w8]
+    volumes: [token-broker-h:/home/nonroot]
+    depends_on:
+      token-broker-h: { condition: service_started }
+      nats: { condition: service_healthy }
+
+  token-broker-h:
+    extends: { file: compose.yaml, service: token-broker-a }
+    profiles: [w8]
+    volumes: [token-broker-h:/home/nonroot]
+
+volumes:
+  token-broker-c:
+  token-broker-d:
+  token-broker-e:
+  token-broker-f:
+  token-broker-g:
+  token-broker-h:

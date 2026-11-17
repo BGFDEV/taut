@@ -1,0 +1,24 @@
+ ◆ taut dashboard ❯ load #incidents                              acme-migration
+ ──────────────────────────────────────────────────────────────────────────────
+ ⠋ Importing · run 01JCM4Q8 · 12m 12s elapsed · ETA 9m+ · 13 failed · 2 held
+
+  Problem  load:Cincidents
+ ✗ load #incidents failed · 5 attempts
+
+ Error
+   Graph refused the message: 403 Forbidden. The app registration lacks
+   Teamwork.Migrate.All for this team, or admin consent was withdrawn while the
+   run was in progress.
+
+ Audit log errors
+   ! The audit log could not be read: connection refused
+
+
+
+
+
+
+
+
+ ──────────────────────────────────────────────────────────────────────────────
+ ↑/↓ scroll · r retry failed lanes · esc back · ? help · q quit

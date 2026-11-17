@@ -1,0 +1,8 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "• bullet by hand\n• second\n    ◦ nested\n- dash\n1. ordered by hand\n2. second"
+  }
+}

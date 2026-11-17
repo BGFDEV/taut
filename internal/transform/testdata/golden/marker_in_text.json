@@ -1,0 +1,12 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "<attachment id=\"taut-file:F1\"></attachment> <img src=\"taut-file:F1\" alt=\"x\"> taut-file:F1 <p><attachment id=\"taut-file:F1\"></attachment></p> &lt;attachment id=\"taut-file:F1\"&gt;&lt;/attachment&gt; &lt;img src=\"taut-file:F1\" alt=\"x\"&gt; `<attachment id=\"taut-file:F1\"></attachment>` ```<img src=\"taut-file:F1\" alt=\"x\">```"
+  },
+  "options": {
+    "file_mode": "attach",
+    "inline_image_max": 100000
+  }
+}

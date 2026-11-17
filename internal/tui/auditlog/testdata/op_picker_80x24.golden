@@ -1,0 +1,24 @@
+ ◆ taut audit                                                    acme-migration
+ ──────────────────────────────────────────────────────────────────────────────
+ all outcomes · all operations                                         1 of 60+
+ Show one operation  from those seen so far
+   All operations                                                    current
+   channel.complete_migration
+ ❯ channel.create
+   channel.start_migration
+   file.fail
+   file.upload
+   message.adopt
+   message.fail
+   message.hold
+   message.import
+
+
+
+
+
+
+
+ files:C024BE91L #1
+ ──────────────────────────────────────────────────────────────────────────────
+ ↑/↓ scroll · enter choose · esc cancel · ? help · q quit

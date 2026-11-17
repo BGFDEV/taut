@@ -1,0 +1,97 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "fallback text",
+    "blocks": [
+      {
+        "type": "header",
+        "text": {
+          "type": "plain_text",
+          "text": "Release <notes>"
+        }
+      },
+      {
+        "type": "rich_text",
+        "elements": [
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "text",
+                "text": "rich body"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "*section* with <https://wiki.example|link> and <@U1>"
+        },
+        "fields": [
+          {
+            "type": "mrkdwn",
+            "text": "*Status*\nok"
+          },
+          {
+            "type": "plain_text",
+            "text": "*plain* <b> & stays"
+          }
+        ]
+      },
+      {
+        "type": "divider"
+      },
+      {
+        "type": "context",
+        "elements": [
+          {
+            "type": "image",
+            "image_url": "https://files.slack.com/x.png?t=xoxe-FAKE",
+            "alt_text": "icon"
+          },
+          {
+            "type": "mrkdwn",
+            "text": "_context_"
+          }
+        ]
+      },
+      {
+        "type": "image",
+        "image_url": "https://img.example/a.png",
+        "alt_text": "a <chart>"
+      },
+      {
+        "type": "actions",
+        "elements": [
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "text": "Approve"
+            }
+          }
+        ]
+      },
+      {
+        "type": "rich_text",
+        "elements": [
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "text",
+                "text": "second rich block"
+              }
+            ]
+          }
+        ]
+      },
+      "junk"
+    ]
+  }
+}

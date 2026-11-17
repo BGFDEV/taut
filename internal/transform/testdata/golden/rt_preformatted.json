@@ -1,0 +1,61 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "rich_text",
+        "block_id": "b1",
+        "elements": [
+          {
+            "type": "rich_text_preformatted",
+            "border": 0,
+            "elements": [
+              {
+                "type": "text",
+                "text": "if a < b && c > d {\n\treturn \"x\"\n}\n"
+              },
+              {
+                "type": "link",
+                "url": "https://ci.example/run"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "link",
+                "url": "https://ci.example/x",
+                "text": "labelled"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "user",
+                "user_id": "U1"
+              },
+              {
+                "type": "emoji",
+                "name": "fire"
+              },
+              {
+                "type": "text",
+                "text": "\n*not bold* <b>",
+                "style": {
+                  "bold": true
+                }
+              }
+            ]
+          },
+          {
+            "type": "rich_text_preformatted",
+            "elements": []
+          }
+        ]
+      }
+    ]
+  }
+}

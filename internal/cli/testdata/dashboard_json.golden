@@ -1,0 +1,176 @@
+{
+  "run": {
+    "id": "run-2026-11-14-d3c4b5",
+    "name": "fixture",
+    "status": "running",
+    "configHash": "sha256:5f1d",
+    "createdAt": "2026-11-14T11:51:00Z",
+    "updatedAt": "2026-11-14T11:59:59Z",
+    "progress": {
+      "stages": [
+        {
+          "stage": "plan",
+          "lanes": 1,
+          "lanesDone": 1,
+          "lanesFailed": 0,
+          "lanesActive": 0,
+          "batches": 1,
+          "batchesDone": 1
+        },
+        {
+          "stage": "extract",
+          "lanes": 3,
+          "lanesDone": 3,
+          "lanesFailed": 0,
+          "lanesActive": 0,
+          "batches": 90,
+          "batchesDone": 90
+        },
+        {
+          "stage": "transform",
+          "lanes": 3,
+          "lanesDone": 3,
+          "lanesFailed": 0,
+          "lanesActive": 0,
+          "batches": 90,
+          "batchesDone": 90
+        },
+        {
+          "stage": "team",
+          "lanes": 1,
+          "lanesDone": 1,
+          "lanesFailed": 0,
+          "lanesActive": 0,
+          "batches": 1,
+          "batchesDone": 1
+        },
+        {
+          "stage": "files",
+          "lanes": 3,
+          "lanesDone": 2,
+          "lanesFailed": 0,
+          "lanesActive": 1,
+          "batches": 6,
+          "batchesDone": 5
+        },
+        {
+          "stage": "load",
+          "lanes": 3,
+          "lanesDone": 1,
+          "lanesFailed": 1,
+          "lanesActive": 1,
+          "batches": 90,
+          "batchesDone": 52
+        }
+      ],
+      "channels": [
+        {
+          "slackId": "C024BE91L",
+          "slackName": "general",
+          "targetName": "General",
+          "kind": "public",
+          "team": "Fixture Corp",
+          "state": "migrating",
+          "posts": 4200,
+          "posted": 2100,
+          "failed": 0,
+          "held": 0,
+          "files": 60,
+          "filesDone": 44,
+          "active": true,
+          "laneFailed": false
+        },
+        {
+          "slackId": "C07QX3M2K",
+          "slackName": "random",
+          "targetName": "random",
+          "kind": "public",
+          "team": "Fixture Corp",
+          "state": "migrating",
+          "posts": 900,
+          "posted": 900,
+          "failed": 0,
+          "held": 0,
+          "files": 12,
+          "filesDone": 12,
+          "active": false,
+          "laneFailed": false
+        },
+        {
+          "slackId": "C09ZZ81AB",
+          "slackName": "incidents",
+          "targetName": "incidents",
+          "kind": "public",
+          "team": "Fixture Corp",
+          "state": "migrating",
+          "posts": 640,
+          "posted": 310,
+          "failed": 3,
+          "held": 1,
+          "files": 0,
+          "filesDone": 0,
+          "active": false,
+          "laneFailed": true,
+          "lastError": "403 Forbidden"
+        }
+      ],
+      "problems": [
+        {
+          "lane": "load:C09ZZ81AB",
+          "stage": "load",
+          "status": "failed",
+          "attempts": 5,
+          "notBefore": "0001-01-01T00:00:00Z",
+          "error": "Graph refused the message: 403 Forbidden"
+        }
+      ],
+      "posts": 5740,
+      "posted": 3310,
+      "failed": 3,
+      "held": 1,
+      "adopted": 0,
+      "files": 72,
+      "filesUploaded": 56,
+      "filesSkipped": 0,
+      "filesFailed": 0,
+      "fileBytes": 480000000,
+      "fileBytesDone": 350000000
+    }
+  },
+  "cluster": {
+    "workers": [
+      {
+        "holder": "worker-a1f3",
+        "lanes": 2,
+        "stages": [
+          "files",
+          "load"
+        ],
+        "leaseExpires": "2026-11-14T12:00:24Z"
+      }
+    ],
+    "budgets": [
+      {
+        "key": {
+          "tenant": "9f1c2d3e",
+          "scope": "graph"
+        },
+        "totalRps": 40,
+        "shareRps": 40,
+        "holders": [
+          "worker-a1f3"
+        ]
+      }
+    ],
+    "throttles": [
+      {
+        "tenant": "9f1c2d3e",
+        "scope": "graph",
+        "holder": "worker-a1f3",
+        "at": "2026-11-14T11:59:56Z",
+        "until": "2026-11-14T12:00:11Z"
+      }
+    ]
+  },
+  "at": "2026-11-14T12:00:00Z"
+}

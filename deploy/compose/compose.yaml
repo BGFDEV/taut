@@ -1,0 +1,223 @@
+# Taut local stack.
+#
+#   make up     start everything and wait until healthy
+#   make down   stop and delete volumes
+#
+# Runs the backing services, a fake Microsoft Graph, the controller and two workers,
+# each with its token broker and egress proxy: enough to run `taut migrate`
+# end to end without a real tenant.
+# Every port is bound to localhost only.
+
+name: taut
+
+# Both Taut services run the same image. Only one of them declares the build,
+# so Compose never builds the same tag twice in parallel.
+x-taut: &taut
+  image: taut:dev
+  restart: unless-stopped
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: taut
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-taut-local-dev}
+      POSTGRES_DB: taut
+    ports: ["127.0.0.1:5432:5432"]
+    volumes: [postgres:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U taut -d taut"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  nats:
+    image: nats:2.15-alpine
+    command: ["-js", "-sd", "/data", "-m", "8222"]
+    ports: ["127.0.0.1:4222:4222", "127.0.0.1:8222:8222"]
+    volumes: [nats:/data]
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:8222/healthz"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  # S3-compatible staging. RustFS replaces MinIO, whose community server was
+  # archived (see docs/design-notes.md). Taut encrypts objects client-side,
+  # so nothing here depends on the store's own encryption.
+  staging:
+    image: rustfs/rustfs:1.0.5
+    environment:
+      RUSTFS_ACCESS_KEY: ${S3_ACCESS_KEY:-taut-local}
+      RUSTFS_SECRET_KEY: ${S3_SECRET_KEY:-taut-local-dev-secret}
+    ports: ["127.0.0.1:9000:9000", "127.0.0.1:9001:9001"]
+    volumes: [staging:/data]
+
+  telemetry:
+    image: otel/opentelemetry-collector-contrib:0.165.0
+    command: ["--config=/etc/otelcol/config.yaml"]
+    volumes: ["./otel-collector.yaml:/etc/otelcol/config.yaml:ro"]
+    # 4317/4318 OTLP in, 13133 health, 9464 the metrics as a Prometheus page:
+    #   curl -s http://127.0.0.1:9464/metrics | grep taut_
+    # Traces are printed in full to the collector's log:
+    #   docker compose -f deploy/compose/compose.yaml logs -f telemetry
+    ports: ["127.0.0.1:4317:4317", "127.0.0.1:4318:4318", "127.0.0.1:13133:13133", "127.0.0.1:9464:9464"]
+
+  # A fake Entra token endpoint and Microsoft Graph, seeded with the directory
+  # that matches the "medium" fixture export.
+  fakegraph:
+    <<: *taut
+    build:
+      context: ../..
+    # The TAUT_LOADTEST_* variables are set by scripts/load-test.sh only;
+    # without them this is the medium fixture, no limits and no latency.
+    command:
+      - dev
+      - fakegraph
+      - --addr=:8080
+      - --fixture=${TAUT_LOADTEST_FIXTURE:-medium}
+      - --limits=${TAUT_LOADTEST_LIMITS:-none}
+      - --latency=${TAUT_LOADTEST_LATENCY:-0s}
+      - --jitter=${TAUT_LOADTEST_JITTER:-0s}
+    ports: ["127.0.0.1:8080:8080"]
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/taut", "dev", "healthcheck", "http://127.0.0.1:8080/healthz"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  controller:
+    <<: *taut
+    command: ["controller"]
+    environment: &backing
+      TAUT_CONTROLLER_ADDR: ":7070"
+      TAUT_POSTGRES_URL: postgres://taut:${POSTGRES_PASSWORD:-taut-local-dev}@postgres:5432/taut?sslmode=disable
+      TAUT_NATS_URL: nats://nats:4222
+      TAUT_S3_ENDPOINT: http://staging:9000
+      TAUT_S3_ACCESS_KEY: ${S3_ACCESS_KEY:-taut-local}
+      TAUT_S3_SECRET_KEY: ${S3_SECRET_KEY:-taut-local-dev-secret}
+      TAUT_S3_BUCKET: taut-staging
+      # Protects everything in staging. `make up` generates one into .env.
+      TAUT_STAGING_KEY: ${TAUT_STAGING_KEY:?run make up, which generates deploy/compose/.env}
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://telemetry:4317
+      # Export metrics every 10s rather than every minute, so a short local
+      # run shows up while it is still going.
+      OTEL_METRIC_EXPORT_INTERVAL: "10000"
+      # Tenant-wide budgets the egress proxies share. The fake Graph has no limit;
+      # real tenants need the defaults (40 for Graph, 20 for SharePoint).
+      TAUT_BUDGET_GRAPH_RPS: "${TAUT_LOADTEST_GRAPH_RPS:-2000}"
+      TAUT_BUDGET_SHAREPOINT_RPS: "${TAUT_LOADTEST_SHAREPOINT_RPS:-2000}"
+      # Local stack only: no API token, and config files may point at the fake
+      # servers. The controller refuses both unless told to allow them.
+      TAUT_CONTROLLER_INSECURE: "1"
+      TAUT_ALLOW_TEST_ENDPOINTS: "1"
+    ports: ["127.0.0.1:7070:7070"]
+    depends_on:
+      postgres: { condition: service_healthy }
+      nats: { condition: service_healthy }
+      staging: { condition: service_started }
+      telemetry: { condition: service_started }
+      fakegraph: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/taut", "dev", "healthcheck", "http://127.0.0.1:7070/readyz"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  # Workers do the work. They are interchangeable and can be killed at any
+  # time: `docker kill` one mid-run and the others, or its replacement, carry
+  # on without importing anything twice. Scale with:
+  #   docker compose -f deploy/compose/compose.yaml up -d --scale worker=4
+  #
+  #
+  # Each worker runs with two sidecars, as a pod of three:
+  #
+  #   worker        does the work; holds no credential; talks only to its egress proxy
+  #   egress proxy  the way out: adds tokens, enforces shared rate limits, TLS
+  #   token broker  the only container that can read a secret
+  #
+  # In Kubernetes the three share a pod and the egress proxy listens on localhost
+  # only. Compose has no pods, so here the egress proxy listens on the stack's
+  # private network instead. That is acceptable for a local stack and nowhere
+  # else: the egress proxy will send authenticated requests for whoever can reach it.
+  worker-a: &worker
+    <<: *taut
+    command: ["worker", "--stages", "all"]
+    environment: &worker-env
+      <<: *backing
+      TAUT_PROXY_URL: http://egress-proxy-a:8900
+      TAUT_WORKER_CONCURRENCY: "${TAUT_LOADTEST_CONCURRENCY:-4}"
+      # Inside the stack the fake servers are reached by service name.
+      TAUT_ENTRA_AUTHORITY: http://fakegraph:8080
+      TAUT_GRAPH_URL: http://fakegraph:8080
+      TAUT_SLACK_FILES_URL: http://fakegraph:8080
+    depends_on:
+      controller: { condition: service_healthy }
+      egress-proxy-a: { condition: service_started }
+
+  egress-proxy-a: &egress-proxy
+    <<: *taut
+    command: ["sidecar", "egress-proxy"]
+    environment:
+      TAUT_PROXY_ADDR: "0.0.0.0:8900" # local stack only; see above
+      TAUT_TOKEN_SOCKET: /home/nonroot/token/token.sock
+      TAUT_NATS_URL: nats://nats:4222
+      # The egress proxy continues the worker's trace for each request it forwards.
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://telemetry:4317
+      OTEL_METRIC_EXPORT_INTERVAL: "10000"
+      # The fake stands in for Graph, SharePoint and Slack's file host.
+      TAUT_PROXY_ALLOW: graph=http://fakegraph:8080
+      # The fake Graph has no rate limit, so let the demo run fast. Real
+      # tenants need the defaults (1 rising to 5 per channel).
+      TAUT_GRAPH_CHANNEL_RPS: "${TAUT_LOADTEST_CHANNEL_RPS:-200}"
+      TAUT_GRAPH_CHANNEL_MAX: "${TAUT_LOADTEST_CHANNEL_MAX:-400}"
+      # A chat's rate does not rise on its own (real tenants: 1 a second).
+      TAUT_GRAPH_CHAT_RPS: "${TAUT_LOADTEST_CHAT_RPS:-200}"
+      # Ceilings on what a lease may grant; they match the controller's budgets.
+      TAUT_BUDGET_GRAPH_RPS: "${TAUT_LOADTEST_GRAPH_RPS:-2000}"
+      TAUT_BUDGET_SHAREPOINT_RPS: "${TAUT_LOADTEST_SHAREPOINT_RPS:-2000}"
+    volumes: [token-broker-a:/home/nonroot]
+    depends_on:
+      token-broker-a: { condition: service_started }
+      nats: { condition: service_healthy }
+
+  token-broker-a: &token-broker
+    <<: *taut
+    command: ["sidecar", "token-broker"]
+    environment:
+      TAUT_TOKEN_SOCKET: /home/nonroot/token/token.sock
+      # The config file names the credential; only this container has it.
+      TAUT_ENTRA_CLIENT_SECRET: fakegraph-local-dev-secret
+      # The one tenant and application this broker will sign in as (the fake
+      # tenant's). A config file cannot make it use any other.
+      TAUT_TOKEN_TENANTS: 7f3c1e9a-52d4-4b1e-9a57-0c8f2d6e4b10
+      TAUT_TOKEN_CLIENTS: 2b9d4c1f-8e3a-4f6b-b7c2-5a1e0d9f3c84
+      TAUT_TOKEN_ALLOW_ENDPOINTS: http://fakegraph:8080
+    volumes: [token-broker-a:/home/nonroot]
+
+  worker-b:
+    <<: *worker
+    environment:
+      <<: *worker-env
+      TAUT_PROXY_URL: http://egress-proxy-b:8900
+    depends_on:
+      controller: { condition: service_healthy }
+      egress-proxy-b: { condition: service_started }
+
+  egress-proxy-b:
+    <<: *egress-proxy
+    volumes: [token-broker-b:/home/nonroot]
+    depends_on:
+      token-broker-b: { condition: service_started }
+      nats: { condition: service_healthy }
+
+  token-broker-b:
+    <<: *token-broker
+    volumes: [token-broker-b:/home/nonroot]
+
+volumes:
+  postgres:
+  nats:
+  staging:
+  token-broker-a:
+  token-broker-b:

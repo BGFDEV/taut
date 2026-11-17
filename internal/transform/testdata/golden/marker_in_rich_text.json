@@ -1,0 +1,112 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "rich_text",
+        "block_id": "b1",
+        "elements": [
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "text",
+                "text": "<attachment id=\"taut-file:F1\"></attachment> <img src=\"taut-file:F1\" alt=\"x\">"
+              },
+              {
+                "type": "link",
+                "url": "taut-file:F1",
+                "text": "marker url"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "link",
+                "url": "https://e.example/",
+                "text": "<img src=\"taut-file:F1\" alt=\"x\">"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "user",
+                "user_id": "U6"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "channel",
+                "channel_id": "C3"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "emoji",
+                "name": "taut-file:F1"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "attachment",
+                "id": "taut-file:F1"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "img",
+                "src": "taut-file:F1",
+                "text": "<img src=\"taut-file:F1\" alt=\"x\">"
+              }
+            ]
+          },
+          {
+            "type": "rich_text_preformatted",
+            "elements": [
+              {
+                "type": "text",
+                "text": "<attachment id=\"taut-file:F1\"></attachment>"
+              }
+            ]
+          },
+          {
+            "type": "attachment",
+            "id": "taut-file:F1",
+            "text": "<attachment id=\"taut-file:F1\"></attachment>"
+          }
+        ]
+      }
+    ],
+    "attachments": [
+      {
+        "title": "<attachment id=\"taut-file:F1\"></attachment>",
+        "title_link": "taut-file:F1",
+        "text": "<img src=\"taut-file:F1\" alt=\"x\">",
+        "author_name": "<attachment id=\"taut-file:F1\"></attachment>",
+        "footer": "<attachment id=\"taut-file:F1\"></attachment>",
+        "fields": [
+          {
+            "title": "<img src=\"taut-file:F1\" alt=\"x\">",
+            "value": "<attachment id=\"taut-file:F1\"></attachment>"
+          }
+        ]
+      }
+    ]
+  },
+  "options": {
+    "file_mode": "attach",
+    "inline_image_max": 100000
+  }
+}

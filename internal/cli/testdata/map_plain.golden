@@ -1,0 +1,27 @@
+
+  ◆ taut map  fixture
+
+  Fixture Corp  12 channels  owner admin@fixture.example
+  ├─ #general → General   86 days
+  ├─ #random              82 days
+  ├─ #engineering         78 days
+  ├─ #design              72 days
+  ├─ #marketing           73 days
+  ├─ #sales               73 days
+  ├─ #support             71 days
+  ├─ #incidents           68 days
+  ├─ #announcements       61 days
+  ├─ #product             62 days
+  ├─ #data                55 days
+  └─ #watercooler         47 days
+
+  Not migrating  4
+  Conversation                     Kind      Why
+  #leadership                      private   private channels are not included
+  #hiring                          private   private channels are not included
+  #security-reviews                private   private channels are not included
+  6 direct-message conversations   dm        direct messages are turned off
+
+  ✓ 12 channels in 1 team, 4 not migrating
+
+  Next  taut preflight  check this plan

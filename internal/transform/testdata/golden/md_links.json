@@ -1,0 +1,8 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "<https://wiki.example/a|label | with | pipes> <https://wiki.example/?q=a%7Cb&amp;x=1|query> <https://wiki.example> <HTTPS://EXAMPLE.COM/Up> <https://wiki.example/with space|spaced>"
+  }
+}

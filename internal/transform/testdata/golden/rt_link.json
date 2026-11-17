@@ -1,0 +1,81 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "rich_text",
+        "block_id": "b1",
+        "elements": [
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "link",
+                "url": "https://wiki.example/a?x=1&y=2",
+                "text": "label"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "link",
+                "url": "https://wiki.example/bare"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "link",
+                "url": "https://wiki.example/s",
+                "text": "styled",
+                "style": {
+                  "bold": true,
+                  "code": true
+                }
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "link",
+                "url": "javascript:alert(1)",
+                "text": "js"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "link",
+                "url": "/relative/path",
+                "text": "rel"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "link",
+                "url": "mailto:ada@example.com"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "link",
+                "url": "https://files.slack.com/files-pri/T0-F0/a.png?t=xoxe-FAKE",
+                "text": "https://files.slack.com/files-pri/T0-F0/a.png?t=xoxe-FAKE"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

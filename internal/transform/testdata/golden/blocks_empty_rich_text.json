@@ -1,0 +1,24 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "text is used when blocks show nothing",
+    "blocks": [
+      {
+        "type": "rich_text",
+        "elements": [
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "text",
+                "text": " \n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

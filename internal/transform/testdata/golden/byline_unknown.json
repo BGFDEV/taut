@@ -1,0 +1,13 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "Who wrote this?"
+  },
+  "options": {
+    "author_mapped": false,
+    "author_name": "  ",
+    "author_kind": "<b>"
+  }
+}

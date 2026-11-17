@@ -1,0 +1,16 @@
+
+  ◆ taut auth  acme-migration
+
+  Slack
+    ✓ Token accepted  acme (bot)
+    ! Scopes          groups:read not granted
+      └ Run taut auth --slack-manifest and update the app.
+
+  Microsoft Entra
+    ✓ Signed in with certificate  tenant 1f2e…
+    ✗ Application permissions     1 of 6 missing
+        ✗ Files.ReadWrite.All  upload files
+      └ Grant admin consent, then run taut auth again.
+    ○ Directory readable          needs User.Read.All
+
+  ✗ 1 check failed · 2 passed · 1 warning · 1 skipped

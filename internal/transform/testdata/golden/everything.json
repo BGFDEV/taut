@@ -1,0 +1,112 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "ignored",
+    "blocks": [
+      {
+        "type": "rich_text",
+        "elements": [
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "text",
+                "text": "Body with "
+              },
+              {
+                "type": "user",
+                "user_id": "U1"
+              },
+              {
+                "type": "text",
+                "text": " and "
+              },
+              {
+                "type": "emoji",
+                "name": "tada",
+                "unicode": "1f389"
+              }
+            ]
+          },
+          {
+            "type": "rich_text_list",
+            "style": "bullet",
+            "indent": 0,
+            "border": 0,
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "one"
+                  }
+                ]
+              },
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "two"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "attachments": [
+      {
+        "title": "Unfurl",
+        "title_link": "https://wiki.example/p",
+        "text": "Preview text"
+      }
+    ],
+    "files": [
+      {
+        "id": "F1",
+        "name": "a.pdf",
+        "title": "a.pdf",
+        "mimetype": "application/pdf",
+        "filetype": "pdf",
+        "size": 1234,
+        "mode": "hosted",
+        "user": "U1",
+        "url_private": "https://files.slack.com/files-pri/T0-F1/f?t=xoxe-FAKE-1",
+        "url_private_download": "https://files.slack.com/files-pri/T0-F1/download/f?t=xoxe-FAKE-1",
+        "permalink": "https://acme.slack.com/files/U1/F1/f"
+      }
+    ],
+    "edited": {
+      "user": "U1",
+      "ts": "1709546500.000000"
+    },
+    "reactions": [
+      {
+        "name": "+1",
+        "users": [
+          "U1",
+          "U2"
+        ],
+        "count": 7
+      },
+      {
+        "name": "+1::skin-tone-4",
+        "users": [
+          "U3",
+          "U4"
+        ],
+        "count": 2
+      }
+    ]
+  },
+  "options": {
+    "author_mapped": false,
+    "author_name": "Grace Garcia",
+    "author_kind": "former"
+  }
+}

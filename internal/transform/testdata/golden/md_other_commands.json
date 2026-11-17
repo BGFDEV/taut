@@ -1,0 +1,8 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "<!foo> <!foo|bar> <!foo^a^b|label>"
+  }
+}

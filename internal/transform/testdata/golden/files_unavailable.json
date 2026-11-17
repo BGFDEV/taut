@@ -1,0 +1,28 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "Gone.",
+    "files": [
+      {
+        "id": "F1",
+        "mode": "hidden_by_limit"
+      },
+      {
+        "id": "F2",
+        "hidden_by_limit": true
+      },
+      {
+        "id": "F3",
+        "mode": "tombstone"
+      },
+      {
+        "id": "F4",
+        "mode": "tombstone",
+        "name": "old.txt",
+        "title": "Old title"
+      }
+    ]
+  }
+}

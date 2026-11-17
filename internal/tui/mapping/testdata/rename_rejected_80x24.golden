@@ -1,0 +1,24 @@
+ ◆ taut map                                                      acme-migration
+ ──────────────────────────────────────────────────────────────────────────────
+    - Acme Corp  8 channels  owner admin@acme.example
+    ├─ #general → General                   empty
+ ❯  ├─ #random → chat/random?
+    ├─ #engineering                       74 days
+    ├─ #design                           111 days
+    ├─ #_archive → archive                28 days  ! cannot start with an unde…
+    ├─ #forms → forms-channel             65 days  ! is a reserved name in Tea…
+    ├─ #proj-very-long-very-long-very-…  102 days  ! is longer than 50 charact…
+    └─ #old-project                       19 days  archived
+    - Sales  2 channels  owner admin@acme.example
+    ├─ #sales-emea                        56 days
+    └─ #sales-apac                        93 days
+    - Not migrating  2
+    ├─ #leadership                     private channels are not included
+    └─ 2 direct-message conversations  direct messages are turned off
+
+
+
+ ✗ Teams does not accept "chat/random?" as a channel name. The name contains c…
+ 10 channels in 2 teams, 2 not migrating
+ ──────────────────────────────────────────────────────────────────────────────
+ enter apply · esc cancel · ? help · q quit

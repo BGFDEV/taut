@@ -1,0 +1,103 @@
+{{- $fullname := include "taut.fullname" . -}}
+{{- $v := .Values -}}
+Taut {{ .Chart.AppVersion }} is installed as release "{{ .Release.Name }}" in namespace "{{ .Release.Namespace }}".
+
+  controller   {{ $fullname }}-controller   1 replica, port {{ $v.controller.service.port }}
+  workers      {{ $fullname }}-worker       {{ if $v.worker.autoscaling.enabled }}{{ $v.worker.autoscaling.minReplicas }}-{{ $v.worker.autoscaling.maxReplicas }} replicas (HPA){{ else }}{{ $v.worker.replicas }} replicas{{ end }}, each with its token broker and egress proxy
+
+{{- if $v.dev.insecure }}
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!  WARNING: dev.insecure=true. THIS RELEASE IS NOT SAFE FOR A REAL TENANT.  !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+{{- if $v.dev.controllerInsecure }}
+  - dev.controllerInsecure: the controller's API accepts requests WITHOUT A TOKEN.
+    Anyone who can reach it can start, steer and finalize migrations.
+{{- end }}
+{{- if $v.dev.allowTestEndpoints }}
+  - dev.allowTestEndpoints: config files may point Microsoft and Slack
+    endpoints at servers of their author's choosing.
+{{- end }}
+{{- if $v.dev.noSidecars }}
+  - dev.noSidecars: there is no token broker or egress proxy. THE WORKER
+    CONTAINER HOLDS THE MICROSOFT AND SLACK CREDENTIALS and rate limits only itself.
+{{- end }}
+{{- if $v.dev.tokenAllowEndpoints }}
+  - dev.tokenAllowEndpoints: the token broker will send the credential to
+    {{ join ", " $v.dev.tokenAllowEndpoints }}.
+{{- end }}
+{{- if or $v.dev.entraAuthority $v.dev.graphUrl $v.dev.slackFilesUrl }}
+  - dev.entraAuthority / graphUrl / slackFilesUrl: workers are pointed at
+    replacement Microsoft or Slack endpoints.
+{{- end }}
+  Remove every dev.* value before migrating anything real.
+{{- end }}
+{{- if $v.secrets.create }}
+
+WARNING: secrets.create=true. The Secret "{{ include "taut.devSecretName" . }}" was created from
+plaintext Helm values, which are also stored in the release record. Development
+only: for a real tenant create the Secrets with kubectl and reference them
+with the existingSecret values.
+{{- end }}
+{{- if $v.legacySidecars }}
+
+NOTE: legacySidecars=true. The token broker and the egress proxy run as
+ordinary containers; expect a few retried requests while a pod starts or stops.
+{{- end }}
+{{- if not $v.networkPolicy.enabled }}
+
+NOTE: networkPolicy.enabled=false. Nothing restricts which pods may reach the
+controller or where the worker pods may connect.
+{{- else }}
+{{- $open := list }}
+{{- range $name := list "postgres" "nats" "s3" }}
+{{- if not (index $v.networkPolicy $name).to }}{{ $open = append $open (printf "networkPolicy.%s.to" $name) }}{{ end }}
+{{- end }}
+{{- if and $v.telemetry.endpoint (not $v.networkPolicy.otlp.to) }}{{ $open = append $open "networkPolicy.otlp.to" }}{{ end }}
+{{- if $open }}
+
+NOTE: {{ join ", " $open }} {{ if eq (len $open) 1 }}is{{ else }}are{{ end }} empty. A dependency without a `to` is
+reachable on public IPv4 addresses only: one inside the cluster or on a
+private network cannot be reached until its `to` says where it is, and until
+then the pods may connect to any public address on its port.
+{{- end }}
+{{- end }}
+
+1. Wait for the rollout:
+
+   kubectl -n {{ .Release.Namespace }} rollout status deploy/{{ $fullname }}-controller
+   kubectl -n {{ .Release.Namespace }} rollout status deploy/{{ $fullname }}-worker
+
+2. Reach the controller from your workstation:
+{{- if $v.controller.ingress.enabled }}
+
+   {{ if $v.controller.ingress.tls }}https{{ else }}http{{ end }}://{{ (first $v.controller.ingress.hosts).host }}
+{{- else }}
+
+   kubectl -n {{ .Release.Namespace }} port-forward svc/{{ $fullname }}-controller 7070:{{ $v.controller.service.port }}
+{{- end }}
+
+   In the migration config file set   controller: { url: {{ if $v.controller.ingress.enabled }}{{ if $v.controller.ingress.tls }}https{{ else }}http{{ end }}://{{ (first $v.controller.ingress.hosts).host }}{{ else }}http://127.0.0.1:7070{{ end }} }
+{{- if not (and $v.dev.insecure $v.dev.controllerInsecure) }}
+   and export the API token in the shell that runs `taut migrate`:
+
+   export TAUT_CONTROLLER_TOKEN="$(kubectl -n {{ .Release.Namespace }} get secret {{ include "taut.controllerTokenSecret" . }} -o jsonpath='{.data.{{ $v.controllerToken.key }}}' | base64 -d)"
+{{- end }}
+{{- if include "taut.sidecars" . }}
+
+3. Credentials are read by the token broker only, from these paths. The
+   config file used with this cluster must reference them exactly:
+
+   target.entra.credential.{{ ternary "certificate" "clientSecret" (eq $v.entra.credential.type "certificate") }}:  { file: /run/secrets/taut/{{ include "taut.entraFile" . }} }
+{{- if include "taut.hasSlackToken" . }}
+   source.slack.api.token:  { file: /run/secrets/taut/slack-token }
+{{- end }}
+{{- if $v.tokenBroker.credentialEnv }}
+   (or by environment: { env: {{ ternary "TAUT_ENTRA_CERTIFICATE" "TAUT_ENTRA_CLIENT_SECRET" (eq $v.entra.credential.type "certificate") }} }{{ if include "taut.hasSlackToken" . }}, { env: TAUT_SLACK_TOKEN }{{ end }})
+{{- end }}
+
+   The token broker signs in to tenant {{ $v.entra.tenantId }} as application
+   {{ $v.entra.clientId }} in the "{{ $v.entra.cloud }}" cloud, and nothing else.
+{{- end }}
+
+Operations guide: docs/OPERATIONS.md

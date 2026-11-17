@@ -1,0 +1,20 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "",
+    "files": [
+      {
+        "id": "F1",
+        "name": "Launch plan",
+        "title": "Launch plan",
+        "mimetype": "application/vnd.slack-docs",
+        "filetype": "quip",
+        "size": 18442,
+        "mode": "space",
+        "url_private": "https://files.slack.com/files-pri/T0-F1/launch_plan?t=xoxe-FAKE"
+      }
+    ]
+  }
+}

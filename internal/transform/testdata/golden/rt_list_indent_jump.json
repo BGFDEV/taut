@@ -1,0 +1,107 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "rich_text",
+        "block_id": "b1",
+        "elements": [
+          {
+            "type": "rich_text_list",
+            "style": "bullet",
+            "indent": 2,
+            "border": 0,
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "starts deep"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "rich_text_list",
+            "style": "bullet",
+            "indent": 0,
+            "border": 0,
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "top"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "rich_text_list",
+            "style": "ordered",
+            "indent": 3,
+            "border": 0,
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "jump of three"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "rich_text_list",
+            "style": "bullet",
+            "indent": 99,
+            "border": 0,
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "clamped"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "rich_text_list",
+            "style": "bullet",
+            "indent": -4,
+            "border": 0,
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "negative"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "rich_text_list",
+            "style": "bullet",
+            "indent": 0,
+            "border": 0,
+            "elements": []
+          }
+        ]
+      }
+    ]
+  }
+}

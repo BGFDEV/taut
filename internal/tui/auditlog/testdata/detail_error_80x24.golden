@@ -1,0 +1,24 @@
+ ◆ taut audit ❯ entry                                            acme-migration
+ ──────────────────────────────────────────────────────────────────────────────
+ Entry  load:C024BE91L #20                                               1 of 4
+
+ Stream          load:C024BE91L
+ Seq             20
+ Time            2026-11-14T09:00:33Z
+ Actor           worker-7f3a/2
+ Operation       message.fail
+ Outcome         ✗ error
+ Source ID       C024BE91L/1700000629.001700
+ Target ID       none
+ Content hash    217bc084cda36664e25e0cc27ec47a8ca4675b6e2c6e5644be92f36b3208bb
+                 a7
+ Detail          graph: 403 Forbidden: Insufficient privileges to complete the
+                 operation (request-id 9d1c) retry after consent
+ Previous hash   d3604770deb7331f8c5b7ff81f6fbadaa1274633baae47ebbe5c01809a7add
+                 31
+ Entry hash      c9d50447531d312edffd84a981a3be7655e675c0c434919a3187584869e0bb
+                 02
+
+
+ ──────────────────────────────────────────────────────────────────────────────
+ esc back · ←/→ prev/next · ↑/↓ scroll · ? help · q quit

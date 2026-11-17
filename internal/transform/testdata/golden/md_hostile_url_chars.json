@@ -1,0 +1,8 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "<https://e.example/?a=\"onmouseover=\"x&amp;b='y'|\"quoted\" &lt;b&gt;'s label> <https://e.example/\"|x> <mailto:a@b.example?subject=\"hi\"&amp;body='x'>"
+  }
+}

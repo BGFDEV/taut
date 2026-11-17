@@ -1,0 +1,24 @@
+ ◆ taut audit                                                    acme-migration
+ ──────────────────────────────────────────────────────────────────────────────
+ Keys
+
+ ↑/k  up                     enter open         e export    ?   help
+ ↓/j  down                   ←/→   prev/next    v verify    esc back
+ pgup page up                /     filter       r retry     q   quit
+ pgdn page down              o     outcome
+ g    top                    p     op
+ G    bottom (loads more)
+
+
+
+
+
+
+
+
+
+
+
+
+ ──────────────────────────────────────────────────────────────────────────────
+ any key close help · q quit

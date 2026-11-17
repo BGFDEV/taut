@@ -1,0 +1,19 @@
+controller:
+  ingress:
+    enabled: true
+    className: nginx
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+    hosts:
+      - host: taut.example.com
+    tls:
+      - secretName: taut-tls
+        hosts: [taut.example.com]
+  podDisruptionBudget:
+    enabled: true
+networkPolicy:
+  controllerIngressFrom:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: ingress-nginx

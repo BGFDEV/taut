@@ -1,0 +1,40 @@
+  ◆ taut map                                                                                            acme-migration
+  ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  ❯  - Acme Corp  8 channels  owner admin@acme.example
+     ├─ #general → General                                    empty
+     ├─ #random                                             37 days
+     ├─ #engineering                                        74 days
+     ├─ #design                                            111 days
+     ├─ #_archive → archive                                 28 days  ! cannot start with an underscore or period
+     ├─ #forms → forms-channel                              65 days  ! is a reserved name in Teams
+     ├─ #proj-very-long-very-long-very-long-very-long-ve…  102 days  ! is longer than 50 characters
+     └─ #old-project                                        19 days  archived
+     - Sales  2 channels  owner admin@acme.example
+     ├─ #sales-emea                                         56 days
+     └─ #sales-apac                                         93 days
+     - Not migrating  2
+     ├─ #leadership                     private channels are not included
+     └─ 2 direct-message conversations  direct messages are turned off
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Acme Corp · owner admin@acme.example
+  10 channels in 2 teams, 2 not migrating
+  ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  space toggle · r rename · m move · / filter · u undo · s save · ? help · q quit

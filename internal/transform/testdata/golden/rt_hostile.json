@@ -1,0 +1,49 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "rich_text",
+        "block_id": "b1",
+        "elements": [
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "text",
+                "text": "</p><script>alert(1)</script> & \"q\" 'a' <at id=\"0\">fake</at>"
+              },
+              {
+                "type": "link",
+                "url": "https://e.example/?q=\"><script>x</script>",
+                "text": "<img src=x onerror=alert(1)>"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "user",
+                "user_id": "U4"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "channel",
+                "channel_id": "C2"
+              },
+              {
+                "type": "text",
+                "text": " \u0000nul\u001f \r\ncrlf"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

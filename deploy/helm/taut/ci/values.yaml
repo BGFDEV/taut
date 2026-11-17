@@ -1,0 +1,25 @@
+# The smallest set of values a real install needs. Used by `make helm-lint`
+# and CI; the names are placeholders, nothing here is a secret.
+image:
+  tag: ci
+entra:
+  tenantId: 00000000-0000-0000-0000-000000000001
+  clientId: 00000000-0000-0000-0000-000000000002
+  credential:
+    type: certificate
+    existingSecret: taut-entra
+slack:
+  token:
+    existingSecret: taut-slack
+postgres:
+  existingSecret: taut-postgres
+nats:
+  url: nats://nats.nats.svc:4222
+s3:
+  endpoint: https://s3.example.com
+  bucket: taut-staging
+  existingSecret: taut-s3
+stagingKey:
+  existingSecret: taut-staging-key
+controllerToken:
+  existingSecret: taut-controller-token

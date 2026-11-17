@@ -1,0 +1,40 @@
+# A throwaway stack against fake Microsoft and Slack services, the way the
+# Compose file wires it. Every protection the chart can switch off is off.
+dev:
+  insecure: true
+  controllerInsecure: true
+  allowTestEndpoints: true
+  tokenAllowEndpoints: [http://fakegraph:8080]
+  entraAuthority: http://fakegraph:8080
+  graphUrl: http://fakegraph:8080
+  slackFilesUrl: http://fakegraph:8080
+egressProxy:
+  extraAllow: [graph=http://fakegraph:8080]
+  channelRps: 200
+  channelMax: 400
+budgets:
+  graphRps: 2000
+  sharepointRps: 2000
+entra:
+  credential:
+    type: clientSecret
+    existingSecret: ""
+slack:
+  token:
+    existingSecret: ""
+postgres:
+  existingSecret: ""
+s3:
+  endpoint: http://staging:9000
+  existingSecret: ""
+stagingKey:
+  existingSecret: ""
+controllerToken:
+  existingSecret: ""
+secrets:
+  create: true
+  postgresUrl: postgres://taut:dev@postgres:5432/taut?sslmode=disable
+  stagingKey: not-a-real-key
+  s3AccessKey: dev
+  s3SecretKey: dev-secret
+  entraClientSecret: fakegraph-local-dev-secret

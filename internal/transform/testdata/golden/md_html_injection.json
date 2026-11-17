@@ -1,0 +1,8 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "<script>alert(1)</script> &lt;script&gt;alert(2)&lt;/script&gt; <img src=x onerror=alert(3)> </p><script>x</script> <b>bold?</b> <!-- c -->"
+  }
+}

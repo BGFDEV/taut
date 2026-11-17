@@ -1,0 +1,8 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "*bold _both_* and *bold _italic ~strike `code`~_* end"
+  }
+}

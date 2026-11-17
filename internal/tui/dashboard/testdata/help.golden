@@ -1,0 +1,24 @@
+ ◆ taut dashboard                                                acme-migration
+ ──────────────────────────────────────────────────────────────────────────────
+ Keys
+
+ ↑/k  up           tab       next pane             ?   help
+ ↓/j  down         shift+tab previous pane         esc back
+ pgup page up      1-3       jump to pane          q   quit
+ pgdn page down    /         filter
+ g    top          o         sort by name
+ G    bottom       enter     open
+                   r         retry failed lanes
+
+
+
+
+
+
+
+
+
+
+
+ ──────────────────────────────────────────────────────────────────────────────
+ any key close help · q quit

@@ -1,0 +1,38 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "Budget sheet lives in Drive.",
+    "files": [
+      {
+        "id": "F1",
+        "name": "FY24 Budget",
+        "title": "FY24 Budget",
+        "mimetype": "application/vnd.google-apps.spreadsheet",
+        "mode": "external",
+        "is_external": true,
+        "external_type": "gdrive",
+        "external_url": "https://docs.google.com/spreadsheets/d/FAKE/edit?a=1&b=\"2\"",
+        "url_private": "https://docs.google.com/spreadsheets/d/FAKE/edit"
+      },
+      {
+        "id": "F2",
+        "name": "evil",
+        "is_external": true,
+        "external_url": "javascript:alert(1)"
+      },
+      {
+        "id": "F3",
+        "title": "No URL",
+        "mode": "external"
+      },
+      {
+        "id": "F4",
+        "title": "Slack-hosted pretending",
+        "is_external": true,
+        "external_url": "https://files.slack.com/files-pri/T0-F4/x?t=xoxe-FAKE"
+      }
+    ]
+  }
+}

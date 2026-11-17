@@ -1,0 +1,24 @@
+ ◆ taut audit                                                    acme-migration
+ ──────────────────────────────────────────────────────────────────────────────
+ all outcomes · channel.create                                           1 of 2
+   TIME (UTC)        OPERATION         SOURCE → TARGET
+ ❯ 11-14 09:00:03  ✓ channel.create    channel/C024BE91L → 19:8f2c4b@thread.ta…
+   11-14 09:03:46  ✓ channel.create    channel/C07QX3M2K → 19:a41d9e@thread.ta…
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ load:C024BE91L #1
+ ──────────────────────────────────────────────────────────────────────────────
+ enter open · / filter · o outcome · p op · e export · ? help · q quit
