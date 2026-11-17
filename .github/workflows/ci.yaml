@@ -98,7 +98,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: go.mod
-      - uses: azure/setup-helm@v4
+      - uses: azure/setup-helm@v5
       - name: PyYAML for the render assertions
         run: python3 -c 'import yaml' || python3 -m pip install --user pyyaml
       - run: make helm-lint
