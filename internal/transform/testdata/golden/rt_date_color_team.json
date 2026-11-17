@@ -1,0 +1,80 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "rich_text",
+        "block_id": "b1",
+        "elements": [
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "date",
+                "timestamp": 1709546400,
+                "format": "{date_long}",
+                "fallback": "March 4, 2024"
+              },
+              {
+                "type": "text",
+                "text": " | "
+              },
+              {
+                "type": "date",
+                "timestamp": 1709546400,
+                "format": "{date}"
+              },
+              {
+                "type": "text",
+                "text": " | "
+              },
+              {
+                "type": "date",
+                "timestamp": "1709546400",
+                "format": "{date}",
+                "url": "https://wiki.example/cal"
+              },
+              {
+                "type": "text",
+                "text": " | "
+              },
+              {
+                "type": "date",
+                "timestamp": 1709546400,
+                "fallback": "linked",
+                "url": "javascript:alert(1)"
+              },
+              {
+                "type": "text",
+                "text": " | "
+              },
+              {
+                "type": "color",
+                "value": "#36a64f"
+              },
+              {
+                "type": "text",
+                "text": " | "
+              },
+              {
+                "type": "team",
+                "team_id": "T0FIXTURE"
+              },
+              {
+                "type": "text",
+                "text": " | "
+              },
+              {
+                "type": "team",
+                "team_id": "T0",
+                "fallback": "Acme"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

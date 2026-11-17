@@ -1,0 +1,104 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "rich_text",
+        "elements": [
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "text",
+                "text": "Media"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "video",
+        "alt_text": "Alt",
+        "title": {
+          "type": "plain_text",
+          "text": "How to <migrate>"
+        },
+        "title_url": "https://video.example/watch?v=1",
+        "video_url": "https://video.example/embed/1",
+        "thumbnail_url": "https://video.example/t.png",
+        "author_name": "Ada",
+        "provider_name": "VidHost",
+        "description": {
+          "type": "plain_text",
+          "text": "A short\ndescription"
+        }
+      },
+      {
+        "type": "video",
+        "alt_text": "Only alt",
+        "title_url": "javascript:alert(1)",
+        "video_url": "https://video.example/embed/2"
+      },
+      {
+        "type": "video",
+        "title": {
+          "type": "plain_text",
+          "text": "No link"
+        },
+        "video_url": "https://files.slack.com/files-pri/T0-F1/v.mp4?t=xoxe-SECRET"
+      },
+      {
+        "type": "video"
+      },
+      {
+        "type": "file",
+        "external_id": "ABCD1",
+        "source": "remote"
+      },
+      {
+        "type": "file",
+        "external_id": "<script>",
+        "source": "remote"
+      },
+      {
+        "type": "file"
+      },
+      {
+        "type": "card",
+        "hero_image": {
+          "type": "image",
+          "image_url": "https://img.example/h.png",
+          "alt_text": "Hero"
+        },
+        "title": {
+          "type": "mrkdwn",
+          "text": "Card *title*"
+        },
+        "subtitle": {
+          "type": "plain_text",
+          "text": "Sub <title>"
+        },
+        "body": {
+          "type": "mrkdwn",
+          "text": "Body with <https://example.com|a link>"
+        },
+        "subtext": {
+          "type": "plain_text",
+          "text": "small print"
+        },
+        "actions": [
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "text": "Go"
+            },
+            "action_id": "a"
+          }
+        ]
+      }
+    ]
+  }
+}

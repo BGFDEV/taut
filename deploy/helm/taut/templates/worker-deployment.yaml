@@ -1,0 +1,304 @@
+{{- $w := .Values.worker }}
+{{- $ctx := dict "root" . "component" "worker" }}
+{{- $sidecars := include "taut.sidecars" . }}
+{{- $native := and $sidecars (not .Values.legacySidecars) }}
+{{- $dev := .Values.dev }}
+
+{{- /*
+The token broker: the only container that mounts the Microsoft and Slack
+credentials. It serves tokens on a Unix socket in a directory it creates
+with mode 0700 inside the shared "sockets" volume.
+*/ -}}
+{{- define "taut.tokenBrokerContainer" -}}
+- name: token-broker
+  image: {{ include "taut.image" .root }}
+  imagePullPolicy: {{ .root.Values.image.pullPolicy }}
+  args: ["sidecar", "token-broker"]
+  {{- if .native }}
+  restartPolicy: Always
+  {{- end }}
+  securityContext:
+    {{- toYaml .root.Values.containerSecurityContext | nindent 4 }}
+  env:
+    - name: TAUT_TOKEN_SOCKET
+      value: /run/taut/token/token.sock
+    - name: TAUT_SECRETS_DIR
+      value: /run/secrets/taut
+    - name: TAUT_TOKEN_TENANTS
+      value: {{ .root.Values.entra.tenantId | quote }}
+    - name: TAUT_TOKEN_CLIENTS
+      value: {{ .root.Values.entra.clientId | quote }}
+    - name: TAUT_TOKEN_CLOUDS
+      value: {{ .root.Values.entra.cloud | quote }}
+    {{- if and .root.Values.dev.insecure .root.Values.dev.tokenAllowEndpoints }}
+    - name: TAUT_TOKEN_ALLOW_ENDPOINTS
+      value: {{ join "," .root.Values.dev.tokenAllowEndpoints | quote }}
+    {{- end }}
+    {{- if .root.Values.tokenBroker.credentialEnv }}
+    {{- include "taut.credentialsEnv" .root | nindent 4 }}
+    {{- end }}
+  # The broker listens on a Unix socket only, so the probes ask it through
+  # the socket with the binary's own health check.
+  startupProbe:
+    exec:
+      command: ["/usr/local/bin/taut", "dev", "healthcheck", "unix:///run/taut/token/token.sock:/healthz"]
+    periodSeconds: 2
+    timeoutSeconds: 5
+    failureThreshold: 30
+  livenessProbe:
+    exec:
+      command: ["/usr/local/bin/taut", "dev", "healthcheck", "unix:///run/taut/token/token.sock:/healthz"]
+    periodSeconds: 30
+    timeoutSeconds: 5
+    failureThreshold: 3
+  resources:
+    {{- toYaml .root.Values.tokenBroker.resources | nindent 4 }}
+  volumeMounts:
+    - name: credentials
+      mountPath: /run/secrets/taut
+      readOnly: true
+    - name: sockets
+      mountPath: /run/taut
+{{- end -}}
+
+{{- /*
+The egress proxy: the worker's only way to Microsoft and Slack. Listens on
+loopback, holds no secret, asks the token broker for tokens over the socket.
+*/ -}}
+{{- define "taut.egressProxyContainer" -}}
+{{- $health := printf "http://%s/_proxy/healthz" (include "taut.proxyAddr" .root) -}}
+- name: egress-proxy
+  image: {{ include "taut.image" .root }}
+  imagePullPolicy: {{ .root.Values.image.pullPolicy }}
+  args: ["sidecar", "egress-proxy"]
+  {{- if .native }}
+  restartPolicy: Always
+  {{- end }}
+  securityContext:
+    {{- toYaml .root.Values.containerSecurityContext | nindent 4 }}
+  env:
+    - name: TAUT_PROXY_ADDR
+      value: {{ include "taut.proxyAddr" .root | quote }}
+    - name: TAUT_TOKEN_SOCKET
+      value: /run/taut/token/token.sock
+    {{- include "taut.natsEnv" .root | nindent 4 }}
+    {{- with .root.Values.egressProxy.extraAllow }}
+    - name: TAUT_PROXY_ALLOW
+      value: {{ join "," . | quote }}
+    {{- end }}
+    {{- with .root.Values.egressProxy.channelRps }}
+    - name: TAUT_GRAPH_CHANNEL_RPS
+      value: {{ . | quote }}
+    {{- end }}
+    {{- with .root.Values.egressProxy.channelMax }}
+    - name: TAUT_GRAPH_CHANNEL_MAX
+      value: {{ . | quote }}
+    {{- end }}
+    {{- with .root.Values.egressProxy.chatShare }}
+    - name: TAUT_GRAPH_CHAT_SHARE
+      value: {{ . | quote }}
+    {{- end }}
+    {{- include "taut.budgetEnv" .root | nindent 4 }}
+    {{- include "taut.telemetryEnv" .root | nindent 4 }}
+    {{- with .root.Values.egressProxy.extraEnv }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  # The proxy listens on loopback, which the kubelet cannot reach, so the
+  # probes run the binary's own health check inside the container.
+  startupProbe:
+    exec:
+      command: ["/usr/local/bin/taut", "dev", "healthcheck", {{ $health | quote }}]
+    periodSeconds: 2
+    timeoutSeconds: 5
+    failureThreshold: 30
+  livenessProbe:
+    exec:
+      command: ["/usr/local/bin/taut", "dev", "healthcheck", {{ $health | quote }}]
+    periodSeconds: 30
+    timeoutSeconds: 5
+    failureThreshold: 3
+  resources:
+    {{- toYaml .root.Values.egressProxy.resources | nindent 4 }}
+  volumeMounts:
+    - name: sockets
+      mountPath: /run/taut
+    {{- include "taut.natsMount" (dict "root" .root "name" "nats-egress-proxy") | nindent 4 }}
+{{- end -}}
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "taut.fullname" . }}-worker
+  labels:
+    {{- include "taut.labels" $ctx | nindent 4 }}
+spec:
+  {{- if not $w.autoscaling.enabled }}
+  replicas: {{ $w.replicas }}
+  {{- end }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  selector:
+    matchLabels:
+      {{- include "taut.selectorLabels" $ctx | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "taut.labels" $ctx | nindent 8 }}
+        {{- with $w.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      annotations:
+        {{- if .Values.secrets.create }}
+        checksum/dev-secret: {{ include (print $.Template.BasePath "/secret-dev.yaml") . | sha256sum }}
+        {{- end }}
+        {{- with $w.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      serviceAccountName: {{ include "taut.serviceAccountName" $ctx }}
+      automountServiceAccountToken: false
+      enableServiceLinks: false
+      {{- include "taut.imagePullSecrets" . | nindent 6 }}
+      # One user for all three containers: the token broker's socket
+      # directory is private to it, and the egress proxy must be able to
+      # open the socket. The worker container never mounts that volume.
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      terminationGracePeriodSeconds: {{ $w.terminationGracePeriodSeconds }}
+      {{- with $w.priorityClassName }}
+      priorityClassName: {{ . }}
+      {{- end }}
+      {{- if $native }}
+      # Native sidecars: started in this order before the worker, restarted
+      # on their own if they exit, stopped after the worker has stopped.
+      initContainers:
+        {{- include "taut.tokenBrokerContainer" (dict "root" . "native" true) | nindent 8 }}
+        {{- include "taut.egressProxyContainer" (dict "root" . "native" true) | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: worker
+          image: {{ include "taut.image" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args: ["worker"]
+          securityContext:
+            {{- toYaml .Values.containerSecurityContext | nindent 12 }}
+          ports:
+            - name: health
+              containerPort: {{ $w.healthPort }}
+              protocol: TCP
+          env:
+            - name: TAUT_WORKER_HEALTH_ADDR
+              value: ":{{ $w.healthPort }}"
+            - name: TAUT_WORKER_STAGES
+              value: {{ $w.stages | quote }}
+            - name: TAUT_WORKER_CONCURRENCY
+              value: {{ $w.concurrency | quote }}
+            - name: TAUT_SCRATCH_DIR
+              value: /var/lib/taut/scratch
+            {{- if $sidecars }}
+            - name: TAUT_PROXY_URL
+              value: "http://{{ include "taut.proxyAddr" . }}"
+            {{- else }}
+            - name: TAUT_INSECURE_NO_SIDECARS
+              value: "1"
+            {{- if .Values.tokenBroker.credentialEnv }}
+            {{- include "taut.credentialsEnv" . | nindent 12 }}
+            {{- end }}
+            {{- end }}
+            {{- include "taut.backingEnv" . | nindent 12 }}
+            {{- include "taut.natsEnv" . | nindent 12 }}
+            {{- if $dev.insecure }}
+            {{- with $dev.entraAuthority }}
+            - name: TAUT_ENTRA_AUTHORITY
+              value: {{ . | quote }}
+            {{- end }}
+            {{- with $dev.graphUrl }}
+            - name: TAUT_GRAPH_URL
+              value: {{ . | quote }}
+            {{- end }}
+            {{- with $dev.slackFilesUrl }}
+            - name: TAUT_SLACK_FILES_URL
+              value: {{ . | quote }}
+            {{- end }}
+            {{- end }}
+            {{- include "taut.telemetryEnv" . | nindent 12 }}
+            {{- with $w.extraEnv }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+          # GET /healthz says the process is up and serving; it carries no
+          # data. The kubelet calls it from the node, which NetworkPolicy
+          # does not filter, so the worker policy still allows no ingress.
+          startupProbe:
+            httpGet: { path: /healthz, port: health }
+            periodSeconds: 2
+            failureThreshold: 60
+          livenessProbe:
+            httpGet: { path: /healthz, port: health }
+            periodSeconds: 20
+            timeoutSeconds: 3
+            failureThreshold: 3
+          resources:
+            {{- toYaml $w.resources | nindent 12 }}
+          volumeMounts:
+            - name: backing
+              mountPath: /run/secrets/taut-backing
+              readOnly: true
+            - name: scratch
+              mountPath: /var/lib/taut/scratch
+            {{- include "taut.natsMount" (dict "root" . "name" "nats-worker") | nindent 12 }}
+            {{- if not $sidecars }}
+            - name: credentials
+              mountPath: /run/secrets/taut
+              readOnly: true
+            {{- end }}
+        {{- if and $sidecars (not $native) }}
+        {{- include "taut.tokenBrokerContainer" (dict "root" . "native" false) | nindent 8 }}
+        {{- include "taut.egressProxyContainer" (dict "root" . "native" false) | nindent 8 }}
+        {{- end }}
+      volumes:
+        {{- include "taut.backingVolume" (dict "root" . "token" false) | nindent 8 }}
+        {{- include "taut.credentialsVolume" . | nindent 8 }}
+        {{- include "taut.natsVolume" (dict "root" . "name" "nats-worker" "key" .Values.nats.credentials.workerKey) | nindent 8 }}
+        {{- if $sidecars }}
+        {{- include "taut.natsVolume" (dict "root" . "name" "nats-egress-proxy" "key" .Values.nats.credentials.egressProxyKey) | nindent 8 }}
+        {{- end }}
+        # The decrypted copy of the export. Removed with the pod.
+        - name: scratch
+          emptyDir:
+            sizeLimit: {{ $w.scratch.sizeLimit }}
+            {{- with $w.scratch.medium }}
+            medium: {{ . }}
+            {{- end }}
+        {{- if $sidecars }}
+        # The token broker's socket. In memory, shared by the token broker
+        # and the egress proxy only.
+        - name: sockets
+          emptyDir:
+            medium: Memory
+            sizeLimit: 1Mi
+        {{- end }}
+      {{- with $w.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $w.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $w.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $w.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- range . }}
+        - {{- $c := . }}
+          {{- if not $c.labelSelector }}
+          {{- $c = merge (dict "labelSelector" (dict "matchLabels" (include "taut.selectorLabels" $ctx | fromYaml))) $c }}
+          {{- end }}
+          {{- toYaml $c | nindent 10 }}
+        {{- end }}
+      {{- end }}

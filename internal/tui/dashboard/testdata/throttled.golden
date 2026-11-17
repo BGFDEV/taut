@@ -1,0 +1,24 @@
+ ◆ taut dashboard                                                acme-migration
+ ──────────────────────────────────────────────────────────────────────────────
+ ⠋ Importing · run 01JCM4Q8 · 12m 12s elapsed · ETA 9m+ · 13 failed · 2 held
+ Posts  ━━━━━━━━━━──────────────   44%  21,684 of ~49,000        53/s  █▄▄▇▃▆▅▅
+ Files  ━━━━━━━━━━━━━━━━━━━━━───   90%  687 of 759           2.7 MB/s  ▆█▂▅▇▁▄▆
+ Stages  ✓ plan 1/1   ✓ extract 8/8   ⠋ transform 5/8 · 2   ✓ team 2/2
+         ⠋ files 6/8 · 1   ✗ load 2/8 · 2
+
+  Channels  8 · 2 active · 1 failed                                    by state
+
+  Cluster  2 workers · throttled graph
+ Workers
+   worker-a1f3  3 lanes  files, load  lease 22s left
+   worker-c9d2  2 lanes  transform    renewed 3s ago
+ Budgets
+   graph       40 rps  2 proxies  20 rps each
+   sharepoint  10 rps  1 proxy    10 rps each
+ Throttling
+   ! throttled graph · 12s left · 3 in the last 5 min
+
+  Problems  1 failed · 1 retrying
+
+ ──────────────────────────────────────────────────────────────────────────────
+ ↑/↓ scroll · tab next pane · ? help · q quit

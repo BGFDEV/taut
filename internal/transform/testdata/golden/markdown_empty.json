@@ -1,0 +1,25 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "fallback *text*",
+    "blocks": [
+      {
+        "type": "markdown",
+        "text": "   \n\n"
+      },
+      {
+        "type": "markdown",
+        "text": ""
+      },
+      {
+        "type": "markdown"
+      },
+      {
+        "type": "markdown",
+        "text": 5
+      }
+    ]
+  }
+}

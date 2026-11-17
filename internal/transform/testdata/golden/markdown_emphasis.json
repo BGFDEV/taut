@@ -1,0 +1,13 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "markdown",
+        "text": "snake_case_name stays, 2 * 3 * 4 stays, _under_ and __strong__ work.\n**bold with *nested* italic** and *italic with **nested** bold*.\n\nUnbalanced **bold and *italic stay text.\n\nEscaped \\*stars\\* and \\_underscores\\_ and \\[brackets\\]\\(parens\\).\nA ~single~ and ~~double~~ strike, **** four stars, a * lone star.\nCode keeps `**markers**` and ``a ` tick``, an unclosed ` tick.\nHard break with backslash\\\nand with spaces  \nend. Intra*word*emphasis and intra_word_underscores."
+      }
+    ]
+  }
+}

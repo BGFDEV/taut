@@ -1,0 +1,28 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "Everyone is mapped",
+    "reactions": [
+      {
+        "name": "tada",
+        "users": [
+          "U1",
+          "U2"
+        ],
+        "count": 2
+      },
+      {
+        "name": "one",
+        "users": [
+          "U4"
+        ],
+        "count": 1
+      }
+    ]
+  },
+  "options": {
+    "reactions": "native"
+  }
+}

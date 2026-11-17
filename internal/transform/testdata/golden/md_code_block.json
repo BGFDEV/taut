@@ -1,0 +1,8 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "before\n```*not bold* _x_ <@U1> :smile: &lt;tag&gt;\n  indented\n```\nafter ```one line``` tail"
+  }
+}

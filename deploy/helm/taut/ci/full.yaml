@@ -1,0 +1,39 @@
+# Everything optional that a production install might turn on.
+image:
+  digest: sha256:0000000000000000000000000000000000000000000000000000000000000000
+imagePullSecrets:
+  - name: registry
+entra:
+  cloud: usgovhigh
+tokenBroker:
+  credentialEnv: true
+nats:
+  url: tls://nats.nats.svc:4222
+  credentials:
+    existingSecret: taut-nats-creds
+  tls:
+    existingSecret: taut-nats-tls
+    caKey: ca.crt
+    certKey: tls.crt
+    keyKey: tls.key
+telemetry:
+  endpoint: http://otel-collector.observability.svc:4317
+  metricExportIntervalMs: 30000
+  env:
+    - name: OTEL_RESOURCE_ATTRIBUTES
+      value: deployment.environment=prod
+budgets:
+  graphRps: 30
+  sharepointRps: 15
+  slackRps: 1
+egressProxy:
+  extraAllow:
+    - sharepoint=*.sharepoint-mil.us
+networkPolicy:
+  postgres:
+    to:
+      - ipBlock: { cidr: 10.0.5.10/32 }
+  cilium:
+    enabled: true
+    extraFQDNs:
+      - matchPattern: "*.sharepoint-mil.us"

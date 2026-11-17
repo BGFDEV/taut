@@ -1,0 +1,29 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "x",
+    "attachments": [
+      {
+        "title": "<script>alert(1)</script>",
+        "title_link": "javascript:alert(1)",
+        "text": "</blockquote><script>",
+        "author_name": "<b>a</b>"
+      },
+      "junk",
+      null,
+      {
+        "title": "t",
+        "title_link": "https://files.slack.com/f?t=xoxe-FAKE"
+      },
+      {
+        "fields": "nope",
+        "text": 5,
+        "title": [
+          "x"
+        ]
+      }
+    ]
+  }
+}

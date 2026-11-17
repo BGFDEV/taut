@@ -1,0 +1,55 @@
+version: "2"
+
+run:
+  timeout: 5m
+
+linters:
+  default: standard
+  enable:
+    - bodyclose
+    - errorlint
+    - gocritic
+    - gosec
+    - misspell
+    - nilerr
+    - noctx
+    - revive
+    - unconvert
+    - unparam
+  settings:
+    gosec:
+      excludes:
+        - G104 # unchecked errors are covered by errcheck
+        - G304 # reading operator-supplied paths is the product's job
+        - G115 # integer conversions here are bounded by construction
+        - G404 # math/rand is used only for jitter, never for secrets
+        - G118 # shutdown paths deliberately outlive the request context
+    revive:
+      rules:
+        - name: exported
+          disabled: true
+    staticcheck:
+      # The quick-fix suggestions (De Morgan, tagged switches) are style
+      # preferences, not defects.
+      checks: ["all", "-QF1001", "-QF1002", "-QF1011", "-ST1000", "-ST1023"]
+  exclusions:
+    presets:
+      - std-error-handling
+    rules:
+      - path: _test\.go
+        linters: [bodyclose, errcheck, errorlint, gocritic, gosec, noctx, staticcheck, unparam]
+      - path: internal/(fixtures|testutil)/
+        linters: [gosec, unparam]
+      - path: internal/sidecar/
+        # Unix-socket and loopback listeners are opened before any request
+        # context exists.
+        linters: [noctx]
+
+formatters:
+  enable:
+    - gofmt
+    - goimports
+  settings:
+    goimports:
+      local-prefixes:
+        - github.com/bgfdev/taut

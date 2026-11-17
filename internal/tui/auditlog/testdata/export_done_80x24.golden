@@ -1,0 +1,24 @@
+ ◆ taut audit ❯ export                                           acme-migration
+ ──────────────────────────────────────────────────────────────────────────────
+ Export
+
+ ✓ Exported 9 entries · csv · 3,469 bytes
+
+ File      errors.csv
+ SHA-256   bb358a28be37b68f20993ee3413a0e6308dd1e768d5b91fc1f755607b464eb85
+
+ Record the SHA-256 with the file: it shows later that the export has not
+ changed.
+
+
+
+
+
+
+
+
+
+
+
+ ──────────────────────────────────────────────────────────────────────────────
+ esc back · ↑/↓ scroll · ? help · q quit

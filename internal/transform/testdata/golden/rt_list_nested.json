@@ -1,0 +1,179 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "rich_text",
+        "block_id": "b1",
+        "elements": [
+          {
+            "type": "rich_text_list",
+            "style": "bullet",
+            "indent": 0,
+            "border": 0,
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "a"
+                  }
+                ]
+              },
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "b"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "rich_text_list",
+            "style": "bullet",
+            "indent": 1,
+            "border": 0,
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "b1"
+                  }
+                ]
+              },
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "b2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "rich_text_list",
+            "style": "bullet",
+            "indent": 2,
+            "border": 0,
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "b2x"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "rich_text_list",
+            "style": "ordered",
+            "indent": 1,
+            "border": 0,
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "b-one"
+                  }
+                ]
+              },
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "b-two"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "rich_text_list",
+            "style": "bullet",
+            "indent": 0,
+            "border": 0,
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "c"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "rich_text_list",
+            "style": "ordered",
+            "indent": 0,
+            "border": 0,
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "first"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "rich_text_list",
+            "style": "bullet",
+            "indent": 1,
+            "border": 0,
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "under first"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "rich_text_list",
+            "style": "ordered",
+            "indent": 0,
+            "border": 0,
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "second"
+                  }
+                ]
+              }
+            ],
+            "offset": 1
+          }
+        ]
+      }
+    ]
+  }
+}

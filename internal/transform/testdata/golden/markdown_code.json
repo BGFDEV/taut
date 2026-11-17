@@ -1,0 +1,13 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "markdown",
+        "text": "~~~\ntilde fence with ``` inside\n~~~\n\n    indented code\n      keeps its indent\n\n````\n```\nnested fence text\n```\n````\n\n```\nunterminated <b>fence</b> & more\n"
+      }
+    ]
+  }
+}

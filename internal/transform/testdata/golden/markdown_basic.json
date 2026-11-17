@@ -1,0 +1,14 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "ignored fallback",
+    "blocks": [
+      {
+        "type": "markdown",
+        "text": "# Release notes\n\nSome **bold**, *italic*, ***both***, ~~struck~~ and `code` text.\nA second line with a [link](https://example.com/a_b?c=1 \"title\") and https://example.org/path.\n\n## Steps ##\n\n1. First\n2. Second\n   - nested *one*\n   - nested two\n3. Third\n\n- [ ] open task\n- [x] done task\n\n> A quote\n> over two lines\n\n```go\nfunc main() { fmt.Println(\"<hi>\") }\n```\n\n---\n\nSetext title\n============\n\nDone :tada:\n"
+      }
+    ]
+  }
+}

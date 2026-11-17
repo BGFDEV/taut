@@ -1,0 +1,152 @@
+{
+  "config": "fixture",
+  "teams": [
+    {
+      "name": "Fixture Corp",
+      "owner": "admin@fixture.example",
+      "channels": [
+        {
+          "slackId": "C0FX008GUS",
+          "slackName": "general",
+          "kind": "public",
+          "targetName": "General",
+          "renamed": false,
+          "days": 86,
+          "warnings": []
+        },
+        {
+          "slackId": "C0FX008MYR",
+          "slackName": "random",
+          "kind": "public",
+          "targetName": "random",
+          "renamed": false,
+          "days": 82,
+          "warnings": []
+        },
+        {
+          "slackId": "C0FX008T2Q",
+          "slackName": "engineering",
+          "kind": "public",
+          "targetName": "engineering",
+          "renamed": false,
+          "days": 78,
+          "warnings": []
+        },
+        {
+          "slackId": "C0FX008Z6P",
+          "slackName": "design",
+          "kind": "public",
+          "targetName": "design",
+          "renamed": false,
+          "days": 72,
+          "warnings": []
+        },
+        {
+          "slackId": "C0FX0095AO",
+          "slackName": "marketing",
+          "kind": "public",
+          "targetName": "marketing",
+          "renamed": false,
+          "days": 73,
+          "warnings": []
+        },
+        {
+          "slackId": "C0FX009BEN",
+          "slackName": "sales",
+          "kind": "public",
+          "targetName": "sales",
+          "renamed": false,
+          "days": 73,
+          "warnings": []
+        },
+        {
+          "slackId": "C0FX009HIM",
+          "slackName": "support",
+          "kind": "public",
+          "targetName": "support",
+          "renamed": false,
+          "days": 71,
+          "warnings": []
+        },
+        {
+          "slackId": "C0FX009NML",
+          "slackName": "incidents",
+          "kind": "public",
+          "targetName": "incidents",
+          "renamed": false,
+          "days": 68,
+          "warnings": []
+        },
+        {
+          "slackId": "C0FX009TQK",
+          "slackName": "announcements",
+          "kind": "public",
+          "targetName": "announcements",
+          "renamed": false,
+          "days": 61,
+          "warnings": []
+        },
+        {
+          "slackId": "C0FX009ZUJ",
+          "slackName": "product",
+          "kind": "public",
+          "targetName": "product",
+          "renamed": false,
+          "days": 62,
+          "warnings": []
+        },
+        {
+          "slackId": "C0FX00A5YI",
+          "slackName": "data",
+          "kind": "public",
+          "targetName": "data",
+          "renamed": false,
+          "days": 55,
+          "warnings": []
+        },
+        {
+          "slackId": "C0FX00AC2H",
+          "slackName": "watercooler",
+          "kind": "public",
+          "targetName": "watercooler",
+          "renamed": false,
+          "days": 47,
+          "warnings": []
+        }
+      ]
+    }
+  ],
+  "skipped": [
+    {
+      "slackId": "C0FX00AI6G",
+      "slackName": "leadership",
+      "kind": "private",
+      "reason": "private channels are not included",
+      "days": 52
+    },
+    {
+      "slackId": "C0FX00AOAF",
+      "slackName": "hiring",
+      "kind": "private",
+      "reason": "private channels are not included",
+      "days": 55
+    },
+    {
+      "slackId": "C0FX00AUEE",
+      "slackName": "security-reviews",
+      "kind": "private",
+      "reason": "private channels are not included",
+      "days": 40
+    },
+    {
+      "slackName": "6 direct-message conversations",
+      "kind": "dm",
+      "reason": "direct messages are turned off",
+      "days": -1
+    }
+  ],
+  "blockers": [],
+  "warnings": [],
+  "changes": [],
+  "saved": false
+}

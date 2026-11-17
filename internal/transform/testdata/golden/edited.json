@@ -1,0 +1,12 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "This message was edited once.",
+    "edited": {
+      "user": "U1",
+      "ts": "1709546500.000000"
+    }
+  }
+}

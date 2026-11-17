@@ -1,0 +1,13 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "markdown",
+        "text": "Hi <@U1>, see <#C1> and <!here>. Unknown <@U999|someone>.\nAutolink <https://example.com/x> and <mailto:a@example.com>.\nLink to a person [**<@U2>**](https://example.com/u2).\nImage ![diagram](https://img.example/d.png) and ![](https://img.example/e.png).\nEntities &lt;tag&gt; &amp; raw < > chars."
+      }
+    ]
+  }
+}

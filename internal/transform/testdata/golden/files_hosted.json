@@ -1,0 +1,76 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "Awkward names.",
+    "upload": true,
+    "files": [
+      {
+        "id": "F1",
+        "name": "résumé (final) #2 100%.pdf",
+        "title": "résumé (final) #2 100%.pdf",
+        "mimetype": "application/pdf",
+        "filetype": "pdf",
+        "size": 1234,
+        "mode": "hosted",
+        "user": "U1",
+        "url_private": "https://files.slack.com/files-pri/T0-F1/f?t=xoxe-FAKE-1",
+        "url_private_download": "https://files.slack.com/files-pri/T0-F1/download/f?t=xoxe-FAKE-1",
+        "permalink": "https://acme.slack.com/files/U1/F1/f"
+      },
+      {
+        "id": "F2",
+        "name": "../../escape.txt",
+        "title": "../../escape.txt",
+        "mimetype": "application/pdf",
+        "filetype": "pdf",
+        "size": 2468,
+        "mode": "hosted",
+        "user": "U1",
+        "url_private": "https://files.slack.com/files-pri/T0-F2/f?t=xoxe-FAKE-2",
+        "url_private_download": "https://files.slack.com/files-pri/T0-F2/download/f?t=xoxe-FAKE-2",
+        "permalink": "https://acme.slack.com/files/U1/F2/f"
+      },
+      {
+        "id": "F3",
+        "name": "report.pdf",
+        "title": "Quarterly <report> & \"notes\"",
+        "mimetype": "application/pdf",
+        "filetype": "pdf",
+        "size": 3702,
+        "mode": "hosted",
+        "user": "U1",
+        "url_private": "https://files.slack.com/files-pri/T0-F3/f?t=xoxe-FAKE-3",
+        "url_private_download": "https://files.slack.com/files-pri/T0-F3/download/f?t=xoxe-FAKE-3",
+        "permalink": "https://acme.slack.com/files/U1/F3/f"
+      },
+      {
+        "id": "F4",
+        "name": "",
+        "title": "",
+        "mimetype": "application/pdf",
+        "filetype": "pdf",
+        "size": 4936,
+        "mode": "hosted",
+        "user": "U1",
+        "url_private": "https://files.slack.com/files-pri/T0-F4/f?t=xoxe-FAKE-4",
+        "url_private_download": "https://files.slack.com/files-pri/T0-F4/download/f?t=xoxe-FAKE-4",
+        "permalink": "https://acme.slack.com/files/U1/F4/f"
+      },
+      {
+        "id": "F5",
+        "name": "日本語のファイル名 📎.png",
+        "title": "日本語のファイル名 📎.png",
+        "mimetype": "application/pdf",
+        "filetype": "pdf",
+        "size": 6170,
+        "mode": "hosted",
+        "user": "U1",
+        "url_private": "https://files.slack.com/files-pri/T0-F5/f?t=xoxe-FAKE-5",
+        "url_private_download": "https://files.slack.com/files-pri/T0-F5/download/f?t=xoxe-FAKE-5",
+        "permalink": "https://acme.slack.com/files/U1/F5/f"
+      }
+    ]
+  }
+}

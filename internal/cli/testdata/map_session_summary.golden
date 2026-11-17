@@ -1,0 +1,23 @@
+✓ No changes · 4 channels in 2 teams, 2 not migrating
+
+Next  taut preflight  check this plan
+---
+! Quit without saving · 2 unsaved changes discarded · taut.yaml is untouched
+
+Next  taut preflight  check this plan
+---
+Changes  2
+  ~ #dev      renamed Engineering → Platform
+  - #design   excluded from Acme
+
+✓ Saved 2 changes to taut.yaml
+
+Next  taut preflight  check this plan
+---
+Changes  2
+  ~ #dev      renamed Engineering → Platform
+  - #design   excluded from Acme
+
+✓ Saved 2 changes to taut.yaml · 1 unsaved change discarded
+
+Next  taut preflight  check this plan

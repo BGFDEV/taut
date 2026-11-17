@@ -1,0 +1,24 @@
+ ◆ taut audit                                                    acme-migration
+ ──────────────────────────────────────────────────────────────────────────────
+ errors only · all operations                                            1 of 9
+   TIME (UTC)        OPERATION         SOURCE → TARGET
+ ❯ 11-14 09:01:18  ✗ file.fail         C024BE91L/F000045
+   11-14 09:02:52  ✗ file.fail         C024BE91L/F000105
+   11-14 09:05:01  ✗ file.fail         C07QX3M2K/F000045
+   11-14 09:00:33  ✗ message.fail      C024BE91L/1700000629.001700
+   11-14 09:01:09  ✗ message.fail      C024BE91L/1700001480.004000
+   11-14 09:02:13  ✗ message.fail      C024BE91L/1700002997.008100
+   11-14 09:03:18  ✗ message.fail      C024BE91L/1700004514.012200
+   11-14 09:04:16  ✗ message.fail      C07QX3M2K/1700000629.001700
+   11-14 09:04:52  ✗ message.fail      C07QX3M2K/1700001480.004000
+
+
+
+
+
+
+
+
+ files:C024BE91L #3 · slack: file was deleted before it could be downloaded
+ ──────────────────────────────────────────────────────────────────────────────
+ enter open · / filter · o outcome · p op · e export · ? help · q quit

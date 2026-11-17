@@ -1,0 +1,19 @@
+
+  ◆ taut auth  fixture
+
+  Slack
+    ✓ Token found     env TAUT_SLACK_TOKEN
+    ✓ Token accepted  fixture-corp workspace, bot token
+    ✓ Scopes          8 of 8 required granted
+
+  Microsoft Entra
+    ! Credential   client secret (a certificate is safer)
+      └ Prefer a certificate: run scripts/entra-app.sh, then set
+        target.entra.credential.certificate in the config file.
+    ✓ Signed in    tenant 7f3c1e9a-52d4-4b1e-9a57-0c8f2d6e4b10, global cloud
+    ✓ Permissions  8 of 8 required granted
+    ✓ Directory    Fixture Corp
+
+  ! Passed with 1 warning · 6 passed
+
+  Next  taut preflight  check what will and won't migrate

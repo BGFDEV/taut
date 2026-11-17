@@ -1,0 +1,41 @@
+
+  ◆ taut map  fixture
+
+  Fixture Corp  11 channels  owner admin@fixture.example
+  ├─ #general → General   86 days
+  ├─ #engineering         78 days
+  ├─ #design              72 days
+  ├─ #marketing           73 days
+  ├─ #sales               73 days   ✗ selected by 2 teams
+  ├─ #support             71 days   ✗ selected by 2 teams
+  ├─ #incidents           68 days
+  ├─ #announcements       61 days
+  ├─ #product             62 days
+  ├─ #data                55 days
+  └─ #watercooler         47 days
+
+  Go To Market  0 channels  owner admin@fixture.example
+  no channels
+
+  Not migrating  5
+  Conversation                     Kind      Why
+  #random                          public    not selected by any team's include…
+  #leadership                      private   private channels are not included
+  #hiring                          private   private channels are not included
+  #security-reviews                private   private channels are not included
+  6 direct-message conversations   dm        direct messages are turned off
+
+  Changes  1
+    - #random   excluded from Fixture Corp
+
+  Blockers
+  ✗ #sales is selected by 2 teams (Fixture Corp, Go To Market).
+    └ Adjust the include/exclude patterns so each channel belongs to exactly one
+      team.
+  ✗ #support is selected by 2 teams (Fixture Corp, Go To Market).
+    └ Adjust the include/exclude patterns so each channel belongs to exactly one
+      team.
+
+  ✗ Not saved · 2 blockers in the edited mapping
+    └ Nothing was written. Resolve the blockers above in the same command, then
+      run it again.

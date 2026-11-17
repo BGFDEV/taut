@@ -1,0 +1,13 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "markdown",
+        "text": "Intro paragraph\n* bullet interrupts a paragraph\n* second\n\n5. starts at five\n6. six\n\n   continued paragraph of six\n7. seven has code:\n\n   ```\n   lifted code\n   ```\n\n   and text after the code\n8. eight carries on\n\n- a\n  - b\n    - c\n      - d\n- item with\nlazy continuation\n+ a different list\n\n1) paren style\n2) second\n\n0. zero start\n\n- > quote in an item\n- last\n"
+      }
+    ]
+  }
+}

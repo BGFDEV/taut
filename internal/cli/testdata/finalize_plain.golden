@@ -1,0 +1,12 @@
+
+  ◆ taut finalize  fixture
+
+  ✓ Opened channels       3 of 3 channels
+  ✓ Added members         1 of 1 teams
+
+  ✓ Migration finalized · 3 channels open
+    Members     29 added
+    Staging     deleted  the export and everything staged from it
+    Audit log   verified  hash chain intact
+
+  Next  taut audit --export audit.ndjson  keep the audit trail with your records

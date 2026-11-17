@@ -1,0 +1,14 @@
+apiVersion: v2
+name: taut
+description: Taut migrates Slack workspaces into Microsoft Teams. This chart runs the controller and the workers; Postgres, NATS and S3 are external.
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+kubeVersion: ">=1.25.0-0"
+home: https://github.com/bgfdev/taut
+sources:
+  - https://github.com/bgfdev/taut
+keywords:
+  - slack
+  - teams
+  - migration

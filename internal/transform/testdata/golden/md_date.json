@@ -1,0 +1,8 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "<!date^1709546400^{date_short} at {time}|Mar 4, 2024 at 10:00 AM> and <!date^1709546400^{date_num}^https://wiki.example/cal|fallback> and <!date^1709546400^{date}> and <!date^1709546400^{date}^javascript:alert(1)|x> and <!date^nonsense^{date}>"
+  }
+}

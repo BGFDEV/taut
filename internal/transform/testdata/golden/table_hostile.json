@@ -1,0 +1,164 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "table",
+        "column_settings": [
+          {
+            "align": "right\" onmouseover=\"alert(1)"
+          },
+          {
+            "align": "CENTER"
+          },
+          "junk",
+          {
+            "align": 5
+          },
+          {
+            "align": "center"
+          }
+        ],
+        "rows": [
+          [
+            {
+              "type": "raw_text",
+              "text": "</td></tr></table><script>alert(1)</script>"
+            },
+            {
+              "type": "raw_text",
+              "text": "<td style=\"x\">"
+            },
+            {
+              "type": "raw_text",
+              "text": "<attachment id=\"taut-file:F1\"></attachment>"
+            },
+            {
+              "type": "raw_text",
+              "text": "a"
+            },
+            {
+              "type": "raw_text",
+              "text": "centered"
+            }
+          ],
+          "not a row",
+          null,
+          [],
+          [
+            null,
+            "string cell",
+            7,
+            {
+              "type": "mystery",
+              "text": "unknown <b>type</b>"
+            },
+            {
+              "type": "raw_text"
+            }
+          ],
+          [
+            {
+              "type": "rich_text",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "link",
+                      "text": "bad",
+                      "url": "javascript:alert(1)"
+                    },
+                    {
+                      "type": "link",
+                      "url": "https://files.slack.com/files-pri/T0-F1/x?t=xoxe-SECRET"
+                    }
+                  ]
+                },
+                {
+                  "type": "rich_text_list",
+                  "style": "ordered",
+                  "elements": [
+                    {
+                      "type": "rich_text_section",
+                      "elements": [
+                        {
+                          "type": "text",
+                          "text": "first"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "rich_text_section",
+                      "elements": [
+                        {
+                          "type": "text",
+                          "text": "second"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "rich_text_preformatted",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "code line 1\ncode line 2"
+                    }
+                  ]
+                },
+                {
+                  "type": "rich_text_quote",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "quoted "
+                    },
+                    {
+                      "type": "user",
+                      "user_id": "U5"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "raw_number",
+              "number": 1e+300
+            },
+            {
+              "type": "raw_number",
+              "text": 0.1
+            },
+            {
+              "type": "raw_number"
+            }
+          ],
+          [
+            {
+              "type": "raw_text",
+              "text": "only one cell"
+            }
+          ]
+        ]
+      },
+      {
+        "type": "table"
+      },
+      {
+        "type": "table",
+        "rows": "nope"
+      },
+      {
+        "type": "table",
+        "rows": [
+          [],
+          []
+        ]
+      }
+    ]
+  }
+}

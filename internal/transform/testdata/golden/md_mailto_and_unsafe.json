@@ -1,0 +1,8 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "<mailto:ada@example.com|ada@example.com> <mailto:ben@example.com> <tel:+15555550100|call me> <slack://channel?team=T0&id=C0|deep link> <ftp://x.example/f>"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "Mixed reactions",
+    "reactions": [
+      {
+        "name": "+1",
+        "users": [
+          "U1",
+          "U2",
+          "U3"
+        ],
+        "count": 3
+      },
+      {
+        "name": "thumbsup",
+        "users": [
+          "U1"
+        ],
+        "count": 1
+      },
+      {
+        "name": "partyparrot",
+        "users": [
+          "U1",
+          "U2"
+        ],
+        "count": 2
+      },
+      {
+        "name": "wave::skin-tone-3",
+        "users": [
+          "U4"
+        ],
+        "count": 1
+      },
+      {
+        "name": "eyes",
+        "users": [
+          "U2"
+        ],
+        "count": 4
+      },
+      {
+        "name": "heart",
+        "users": [
+          "U5",
+          "UNKNOWN"
+        ],
+        "count": 2
+      }
+    ],
+    "edited": {
+      "user": "U1",
+      "ts": "1709546500.000000"
+    }
+  },
+  "options": {
+    "reactions": "native"
+  }
+}

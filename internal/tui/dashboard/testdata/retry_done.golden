@@ -1,0 +1,24 @@
+ ◆ taut dashboard                                                acme-migration
+ ──────────────────────────────────────────────────────────────────────────────
+ ⠋ Importing · run 01JCM4Q8 · 12m 13s elapsed · ETA 9m+ · 13 failed · 2 held
+ Posts  ━━━━━━━━━━──────────────   44%  21,753 of ~49,000        55/s  ▅▄▇▃▆▆▅█
+ Files  ━━━━━━━━━━━━━━━━━━━━━───   90%  689 of 759           3.0 MB/s  █▂▅▇▁▄▆█
+ Stages  ✓ plan 1/1   ✓ extract 8/8   ⠋ transform 5/8 · 2   ✓ team 2/2
+         ⠋ files 6/8 · 1   ✗ load 2/8 · 2
+
+  Channels  8 · 2 active · 1 failed                                    by state
+
+  Cluster  2 workers
+
+  Problems  1 failed · 1 retrying
+ ❯ ✗ load #incidents         failed            Graph refused the message: 403 …
+   ! files #pipeline-review  attempt 3 in 12s  SharePoint upload session expir…
+
+
+
+
+
+
+ ✓ Returned 1 lane to the queue
+ ──────────────────────────────────────────────────────────────────────────────
+ ↑/↓ scroll · enter open · r retry failed lanes · tab next pane · ? help …

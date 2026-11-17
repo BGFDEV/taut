@@ -1,0 +1,17 @@
+
+  ◆ taut dashboard  fixture
+
+  ✓ Planned               3 channels
+  ✓ Read the export       90 of 90 days
+  ✓ Converted messages    90 of 90 days
+  ✓ Created teams         1 of 1
+  ✓ Moved files           72 of 72 files, 480 MB of 480 MB
+  ✓ Imported into Teams   5,740 of 5,740 posts
+
+  Workers      none at work
+  Throttling   clear · none in the last 5 min
+  Run          run-2026-11-14-d3c4b5
+
+  ✓ Import complete · 5,740 posts · 3 channels
+
+  Next  taut finalize  open the channels and add their members

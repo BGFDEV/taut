@@ -1,0 +1,70 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "Body.",
+    "attachments": [
+      {
+        "title": "Unfurl",
+        "text": "Preview"
+      }
+    ],
+    "files": [
+      {
+        "id": "F1",
+        "name": "a.pdf",
+        "title": "a.pdf",
+        "mimetype": "application/pdf",
+        "filetype": "pdf",
+        "size": 1234,
+        "mode": "hosted",
+        "user": "U1",
+        "url_private": "https://files.slack.com/files-pri/T0-F1/f?t=xoxe-FAKE-1",
+        "url_private_download": "https://files.slack.com/files-pri/T0-F1/download/f?t=xoxe-FAKE-1",
+        "permalink": "https://acme.slack.com/files/U1/F1/f"
+      },
+      {
+        "id": "F2",
+        "name": "b.png",
+        "title": "b.png",
+        "mimetype": "image/png",
+        "filetype": "pdf",
+        "size": 10,
+        "mode": "hosted",
+        "user": "U1",
+        "url_private": "https://files.slack.com/files-pri/T0-F2/f?t=xoxe-FAKE-2",
+        "url_private_download": "https://files.slack.com/files-pri/T0-F2/download/f?t=xoxe-FAKE-2",
+        "permalink": "https://acme.slack.com/files/U1/F2/f"
+      }
+    ],
+    "edited": {
+      "ts": "1"
+    },
+    "reactions": [
+      {
+        "name": "+1",
+        "users": [
+          "U1",
+          "U2"
+        ],
+        "count": 7
+      },
+      {
+        "name": "+1::skin-tone-4",
+        "users": [
+          "U3",
+          "U4"
+        ],
+        "count": 2
+      }
+    ]
+  },
+  "options": {
+    "author_mapped": false,
+    "author_name": "Grace Garcia",
+    "author_kind": "former",
+    "file_mode": "attach",
+    "inline_image_max": 100000
+  }
+}

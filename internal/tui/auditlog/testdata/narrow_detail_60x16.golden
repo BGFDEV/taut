@@ -1,0 +1,16 @@
+ ◆ taut audit ❯ entry                        acme-migration
+ ──────────────────────────────────────────────────────────
+ Entry  files:C024BE91L #1                     0%  1 of 30+
+
+ Stream          files:C024BE91L
+ Seq             1
+ Time            2026-11-14T09:00:15Z
+ Actor           worker-7f3a/2
+ Operation       file.upload
+ Outcome         ✓ ok
+ Source ID       C024BE91L/F000005
+ Target ID       01DRIVEITEM00005
+ Content hash    762c8dc97f713be5413d9c590ae0db72ed62043a13
+                 1b9994a2220bb6cb4dbffa
+ ──────────────────────────────────────────────────────────
+ esc back · ←/→ prev/next · ↑/↓ scroll · ? help · q quit

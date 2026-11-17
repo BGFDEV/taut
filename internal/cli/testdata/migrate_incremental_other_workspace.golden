@@ -1,0 +1,10 @@
+
+  ✗ Not started · 1 blocker
+  ✗ This export is not of the Slack workspace the earlier passes migrated. None
+    of the 3 conversations the earlier passes migrated is in this export, and it
+    is of workspace T0ELSEWHERE where they were of T0FIXTURE.
+    └ Point source.slack.export at a newer export of the same workspace.
+      Importing another workspace's export into these teams would mix two
+      histories.
+
+  Next  taut preflight --incremental  see the full preflight report

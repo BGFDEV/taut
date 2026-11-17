@@ -1,0 +1,24 @@
+ ◆ taut audit                                                    acme-migration
+ ──────────────────────────────────────────────────────────────────────────────
+ all outcomes · all operations · "403"                                   1 of 6
+   TIME (UTC)        OPERATION         SOURCE → TARGET
+ ❯ 11-14 09:00:33  ✗ message.fail      C024BE91L/1700000629.001700
+   11-14 09:00:57  ✓ message.import    C024BE91L/1700001184.003200 → 170000118…
+   11-14 09:02:58  ✓ message.import    C024BE91L/1700004033.010900 → 170000403…
+   11-14 09:03:13  ✓ message.import    C024BE91L/1700004403.011900 → 170000440…
+   11-14 09:04:16  ✗ message.fail      C07QX3M2K/1700000629.001700
+   11-14 09:04:40  ✓ message.import    C07QX3M2K/1700001184.003200 → 170000118…
+
+
+
+
+
+
+
+
+
+
+
+ load:C024BE91L #20 · graph: 403 Forbidden: Insufficient privileges to complet…
+ ──────────────────────────────────────────────────────────────────────────────
+ enter open · / filter · o outcome · p op · e export · ? help · q quit

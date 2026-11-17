@@ -1,0 +1,23 @@
+
+  ◆ taut dashboard  fixture
+
+  ✓ Planned               3 channels
+  ✓ Read the export       90 of 90 days
+  ✓ Converted messages    90 of 90 days
+  ✓ Created teams         1 of 1
+  ◌ Moving files          56 of 72 files, 350 MB of 480 MB
+  ✗ Importing into Teams  52 of 90, 1 lane failed
+
+    #general    ━━━━━━━━━━━━━━──────────────  2,100 of 4,200
+    #incidents  ━━━━━━━━━━━━━━──────────────  314 of 640
+
+  ✗ load:C09ZZ81AB failed: Graph refused the message: 403 Forbidden
+
+  Workers      1 worker on 2 lanes
+  Budgets      graph 40 rps across 1 egress proxy
+  Throttling   throttled graph · 11s left · 1 in the last 5 min
+  Run          run-2026-11-14-d3c4b5
+
+  ● Import in progress · the run continues in the background
+
+  Next  taut dashboard  watch it again

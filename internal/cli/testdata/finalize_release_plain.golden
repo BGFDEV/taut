@@ -1,0 +1,4 @@
+
+  ✓ Chats out of migration mode · 2 chats · run run-2026-11-14-m00r stays cancelled
+
+  Next  taut migrate --new  start the import again; it uses the same chats and does not import a message twice

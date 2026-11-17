@@ -1,0 +1,6 @@
+.git
+bin
+dist
+testdata/fixtures/*.zip
+*.pem
+.env

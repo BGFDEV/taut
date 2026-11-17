@@ -1,0 +1,24 @@
+Slack users                  9
+Matched by email             3
+Matched by override          1
+Matched by email name part   2
+Matched by display name      1
+Unmapped                     2  (12 messages affected)
+Policy                       attribute to former@acme.example, original name kept in the message
+
+Matched by name: review these
+Name             Slack email             Entra account                   Matched by        Messages
+Grace Hopper     ghopper@old.example     ghopper@acme.example            email name part      1,204
+Linus Torvalds   -                       linus@acme.example (disabled)   display name             7
+Tony Hoare       car.hoare@old.example   tony@acme.example               email name part          0
+
+   `- These are guesses. To confirm one, add a row with the right account to the override CSV
+      (identity.overrides). To reject one, add a row whose entra value is none.
+
+Unmapped
+Name         Slack email        Messages   Why
+John Smith   john@old.example          9   email not in Entra; their name fits several accounts
+Deploy Bot   -                         3   bot or app
+
+   `- To map someone by hand, add a row to the override CSV (identity.overrides):
+      slack_user_id,slack_email,entra

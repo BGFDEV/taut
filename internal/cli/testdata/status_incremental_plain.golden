@@ -1,0 +1,25 @@
+
+  ◆ taut status  fixture
+
+  ✓ Planned               4 channels
+  ✓ Read the export       19 of 19 days
+  ✓ Converted messages    19 of 19 days
+  ✓ Created teams         1 of 1
+  ✓ Moved files           3 of 3 files, 42.5 KB of 42.5 KB
+  ✓ Imported into Teams   33 of 33 posts
+
+  ✓ Import complete · pass 2 · 33 posts · 4 channels
+    Imported         33
+    Earlier passes   63  already in Teams; not imported again
+    Files            3 moved (42.5 KB)
+
+  Next  taut finalize  open the channels and add their members
+
+  Run       RUN-ID
+  Started   DATE TIME
+  Pass      2, incremental; follows run RUN-ID (63 posts already in Teams)
+
+  Passes
+  Pass   Run                   Status      Started             Finished
+     1   RUN-ID…   completed   DATE TIME   DATE TIME
+     2   RUN-ID…   completed   DATE TIME   DATE TIME

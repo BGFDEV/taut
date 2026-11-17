@@ -1,0 +1,20 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "subtype": "huddle_thread",
+    "reactions": [
+      {
+        "name": "tada",
+        "users": [
+          "U1"
+        ],
+        "count": 1
+      }
+    ]
+  },
+  "options": {
+    "reactions": "native"
+  }
+}

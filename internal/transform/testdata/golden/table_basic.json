@@ -1,0 +1,113 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "table fallback text",
+    "blocks": [
+      {
+        "type": "table",
+        "column_settings": [
+          {
+            "is_wrapped": true
+          },
+          {
+            "align": "right"
+          },
+          null,
+          {
+            "align": "center"
+          }
+        ],
+        "rows": [
+          [
+            {
+              "type": "raw_text",
+              "text": "Item"
+            },
+            {
+              "type": "raw_text",
+              "text": "Count"
+            },
+            {
+              "type": "raw_text",
+              "text": "Owner"
+            },
+            {
+              "type": "raw_text",
+              "text": "State"
+            }
+          ],
+          [
+            {
+              "type": "rich_text",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "link",
+                      "text": "Docs",
+                      "url": "https://example.com/docs"
+                    },
+                    {
+                      "type": "text",
+                      "text": " and "
+                    },
+                    {
+                      "type": "text",
+                      "text": "bold",
+                      "style": {
+                        "bold": true
+                      }
+                    },
+                    {
+                      "type": "emoji",
+                      "name": "tada"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "raw_number",
+              "number": 42
+            },
+            {
+              "type": "rich_text",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "user",
+                      "user_id": "U1"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "raw_text",
+              "text": "ok"
+            }
+          ],
+          [
+            {
+              "type": "raw_text",
+              "text": "Two\nlines"
+            },
+            {
+              "type": "raw_number",
+              "value": "3.5"
+            },
+            {
+              "type": "raw_text",
+              "text": ""
+            }
+          ]
+        ]
+      }
+    ]
+  }
+}

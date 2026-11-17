@@ -1,0 +1,101 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "rich_text",
+        "block_id": "b1",
+        "elements": [
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "emoji",
+                "name": "wave",
+                "skin_tone": 3,
+                "unicode": "1f44b-1f3fc"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "emoji",
+                "name": "+1",
+                "skin_tone": 6
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "emoji",
+                "name": "tada"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "emoji",
+                "name": "partyparrot"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "emoji",
+                "name": "fire",
+                "unicode": "zz-top"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "emoji",
+                "name": "male-technologist",
+                "unicode": "1f468-200d-1f4bb"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "emoji",
+                "name": "wave::skin-tone-2"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "emoji",
+                "name": "<b>x</b>"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "emoji",
+                "name": "x",
+                "unicode": "d800"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "emoji"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+# Example values for a development cluster where the operator has already
+# installed Postgres, NATS and an S3-compatible store in the same namespace
+# (Services named postgres, nats and staging). It still talks to a real
+# tenant with real credentials held in existing Secrets; see
+# ci/dev-insecure.yaml for a stack built on fakes.
+#
+#   helm install taut deploy/helm/taut -f deploy/helm/taut/values-dev.yaml \
+#     --set entra.tenantId=<tenant-id> --set entra.clientId=<client-id>
+
+image:
+  repository: taut
+  tag: dev
+  pullPolicy: Never # an image loaded into kind/minikube
+
+entra:
+  credential:
+    type: certificate
+    existingSecret: taut-entra
+slack:
+  token:
+    existingSecret: taut-slack
+
+postgres:
+  existingSecret: taut-postgres # url: postgres://taut:...@postgres:5432/taut?sslmode=disable
+nats:
+  url: nats://nats:4222
+s3:
+  endpoint: http://staging:9000
+  bucket: taut-staging
+  existingSecret: taut-s3
+stagingKey:
+  existingSecret: taut-staging-key
+controllerToken:
+  existingSecret: taut-controller-token
+
+worker:
+  replicas: 2
+  scratch:
+    sizeLimit: 2Gi
+  resources:
+    requests: { cpu: 100m, memory: 128Mi }
+    limits: { memory: 512Mi }
+
+# The three services run in this namespace. Without a `to` a dependency is
+# taken to be on the public internet and nothing in the cluster is reachable.
+networkPolicy:
+  postgres:
+    to: [{ podSelector: {} }]
+  nats:
+    to: [{ podSelector: {} }]
+  s3:
+    to: [{ podSelector: {} }]
+    ports: [9000]

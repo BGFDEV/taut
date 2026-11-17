@@ -1,0 +1,111 @@
+{{- $c := .Values.controller }}
+{{- $ctx := dict "root" . "component" "controller" }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "taut.fullname" . }}-controller
+  labels:
+    {{- include "taut.labels" $ctx | nindent 4 }}
+spec:
+  replicas: {{ $c.replicas }}
+  # Never two controllers at once: stop the old one before starting the new.
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      {{- include "taut.selectorLabels" $ctx | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "taut.labels" $ctx | nindent 8 }}
+        {{- with $c.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      annotations:
+        {{- if .Values.secrets.create }}
+        checksum/dev-secret: {{ include (print $.Template.BasePath "/secret-dev.yaml") . | sha256sum }}
+        {{- end }}
+        {{- with $c.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      serviceAccountName: {{ include "taut.serviceAccountName" $ctx }}
+      automountServiceAccountToken: false
+      enableServiceLinks: false
+      {{- include "taut.imagePullSecrets" . | nindent 6 }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      terminationGracePeriodSeconds: {{ $c.terminationGracePeriodSeconds }}
+      {{- with $c.priorityClassName }}
+      priorityClassName: {{ . }}
+      {{- end }}
+      containers:
+        - name: controller
+          image: {{ include "taut.image" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args: ["controller"]
+          securityContext:
+            {{- toYaml .Values.containerSecurityContext | nindent 12 }}
+          ports:
+            - name: http
+              containerPort: {{ $c.port }}
+              protocol: TCP
+          env:
+            - name: TAUT_CONTROLLER_ADDR
+              value: ":{{ $c.port }}"
+            {{- include "taut.backingEnv" . | nindent 12 }}
+            {{- include "taut.natsEnv" . | nindent 12 }}
+            {{- if and .Values.dev.insecure .Values.dev.controllerInsecure }}
+            - name: TAUT_CONTROLLER_INSECURE
+              value: "1"
+            {{- else }}
+            - name: TAUT_CONTROLLER_TOKEN_FILE
+              value: /run/secrets/taut-backing/controller-token
+            {{- end }}
+            {{- if and .Values.dev.insecure .Values.dev.allowTestEndpoints }}
+            - name: TAUT_ALLOW_TEST_ENDPOINTS
+              value: "1"
+            {{- end }}
+            {{- include "taut.budgetEnv" . | nindent 12 }}
+            {{- include "taut.telemetryEnv" . | nindent 12 }}
+            {{- with $c.extraEnv }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+          startupProbe:
+            httpGet: { path: /healthz, port: http }
+            periodSeconds: 2
+            failureThreshold: 60
+          livenessProbe:
+            httpGet: { path: /healthz, port: http }
+            periodSeconds: 20
+            timeoutSeconds: 3
+            failureThreshold: 3
+          # /readyz reports whether Postgres, NATS and the object store
+          # accept connections.
+          readinessProbe:
+            httpGet: { path: /readyz, port: http }
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          resources:
+            {{- toYaml $c.resources | nindent 12 }}
+          volumeMounts:
+            - name: backing
+              mountPath: /run/secrets/taut-backing
+              readOnly: true
+            {{- include "taut.natsMount" (dict "root" . "name" "nats-controller") | nindent 12 }}
+      volumes:
+        {{- include "taut.backingVolume" (dict "root" . "token" true) | nindent 8 }}
+        {{- include "taut.natsVolume" (dict "root" . "name" "nats-controller" "key" .Values.nats.credentials.controllerKey) | nindent 8 }}
+      {{- with $c.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $c.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $c.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

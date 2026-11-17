@@ -1,0 +1,46 @@
+# Telemetry collector configuration for local development.
+# Receives OTLP from the controller, the workers and the egress proxies. Traces are
+# printed in full to the collector's log; metrics are summarized there and
+# served as a Prometheus page on :9464 (published on localhost only).
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  batch: {}
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 256
+
+exporters:
+  # Every span with its attributes: enough to follow a batch from a worker
+  # through its egress proxy.
+  debug/traces:
+    verbosity: detailed
+  debug/metrics:
+    verbosity: basic
+  prometheus:
+    endpoint: 0.0.0.0:9464
+    # service.name and service.instance.id become labels.
+    resource_to_telemetry_conversion:
+      enabled: true
+
+extensions:
+  health_check:
+    endpoint: 0.0.0.0:13133
+
+service:
+  extensions: [health_check]
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [debug/traces]
+    metrics:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [debug/metrics, prometheus]

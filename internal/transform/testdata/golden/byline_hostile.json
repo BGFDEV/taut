@@ -1,0 +1,12 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "x"
+  },
+  "options": {
+    "author_mapped": false,
+    "author_name": "<img src=x onerror=alert(1)> \"O'Neil\" & co\nline2"
+  }
+}

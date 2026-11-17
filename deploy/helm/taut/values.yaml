@@ -1,0 +1,431 @@
+# Taut Helm chart values.
+#
+# Values marked REQUIRED have no usable default; rendering fails with a
+# message naming the value when one is missing. docs/OPERATIONS.md walks
+# through an install.
+
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  repository: ghcr.io/bgfdev/taut
+  # Defaults to the chart's appVersion.
+  tag: ""
+  # When set (sha256:...), the image is pulled by digest and the tag is ignored.
+  digest: ""
+  pullPolicy: IfNotPresent
+imagePullSecrets: []
+
+# Native sidecars (initContainers with restartPolicy: Always) need
+# Kubernetes 1.29 or later. On an older cluster rendering fails unless this
+# is true, which runs the token broker and the egress proxy as ordinary
+# containers: they then start and stop in no particular order relative to the
+# worker, which costs retries at startup and shutdown but not correctness.
+legacySidecars: false
+
+# ----------------------------------------------------------------------------
+# The Microsoft tenant being migrated into. These pin the token broker: it
+# signs in to this tenant, as this application, in this cloud, and nothing
+# else, whatever a migration config file says.
+# ----------------------------------------------------------------------------
+entra:
+  # REQUIRED. Directory (tenant) ID. -> TAUT_TOKEN_TENANTS
+  tenantId: ""
+  # REQUIRED. Application (client) ID. -> TAUT_TOKEN_CLIENTS
+  clientId: ""
+  # global | usgov | usgovhigh | dod | china. -> TAUT_TOKEN_CLOUDS
+  cloud: global
+  credential:
+    # certificate (preferred) or clientSecret.
+    type: certificate
+    # REQUIRED. An existing Secret holding the credential.
+    existingSecret: ""
+    # Key in that Secret. For a certificate: one PEM file with the certificate
+    # and its private key. Default: "certificate.pem" or "client-secret".
+    key: ""
+
+# The Slack bot token, used when the config file enables source.slack.api.
+# Leave existingSecret empty if the migration uses the export alone.
+slack:
+  token:
+    existingSecret: ""
+    key: token
+
+# The token broker mounts the two credentials above as files:
+#
+#   /run/secrets/taut/entra-certificate.pem   (or entra-client-secret)
+#   /run/secrets/taut/slack-token
+#
+# and the migration config file must reference them by those paths:
+#
+#   target: { entra: { credential: { certificate: { file: /run/secrets/taut/entra-certificate.pem } } } }
+#   source: { slack: { api: { token: { file: /run/secrets/taut/slack-token } } } }
+tokenBroker:
+  # Also expose the credentials to the token broker as the environment
+  # variables TAUT_ENTRA_CERTIFICATE / TAUT_ENTRA_CLIENT_SECRET and
+  # TAUT_SLACK_TOKEN, for config files that use `env:` references. Files are
+  # preferred: an environment variable does not change when the Secret is
+  # rotated, a mounted file does.
+  credentialEnv: false
+  resources:
+    requests: { cpu: 10m, memory: 32Mi }
+    limits: { memory: 128Mi }
+
+# ----------------------------------------------------------------------------
+# Backing services. All external: the chart bundles none of them.
+# ----------------------------------------------------------------------------
+postgres:
+  # REQUIRED. Secret holding the full connection URL,
+  # postgres://user:password@host:5432/taut?sslmode=require
+  existingSecret: ""
+  key: url
+
+nats:
+  # REQUIRED. The server URL, with no credentials in it:
+  # nats://nats.nats.svc:4222, or tls://... for TLS.
+  url: ""
+  # NATS credentials files (user JWT and seed, as `nsc generate creds`
+  # writes them), one per identity, so that each can be a different NATS
+  # user with its own subject permissions. docs/OPERATIONS.md has the
+  # matching permissions. Each container mounts only its own file.
+  credentials:
+    existingSecret: ""
+    controllerKey: controller.creds
+    workerKey: worker.creds
+    egressProxyKey: egress-proxy.creds
+  # TLS material, mounted into every container that talks to NATS.
+  tls:
+    existingSecret: ""
+    # Key of a PEM bundle the server's certificate must chain to. Empty: the
+    # system trust store.
+    caKey: ca.crt
+    # Keys of a client certificate and its private key, for a server that
+    # verifies clients. Empty: none.
+    certKey: ""
+    keyKey: ""
+
+s3:
+  # Endpoint of an S3-compatible store (https://s3.example.com). Leave empty
+  # for AWS S3 itself.
+  endpoint: ""
+  region: us-east-1
+  # REQUIRED.
+  bucket: ""
+  # REQUIRED. Secret holding the access key pair.
+  existingSecret: ""
+  accessKeyKey: access-key
+  secretKeyKey: secret-key
+
+# The key that protects everything in staging (`taut dev keygen`). The
+# controller and every worker hold it.
+stagingKey:
+  # REQUIRED.
+  existingSecret: ""
+  key: key
+
+# The controller's API token. Whoever holds it is the migration operator.
+controllerToken:
+  # REQUIRED (unless dev.controllerInsecure).
+  existingSecret: ""
+  key: token
+
+# ----------------------------------------------------------------------------
+# DEVELOPMENT ONLY. Creates one Secret named <release>-dev from the plaintext
+# values below and uses it wherever an existingSecret above is empty. The
+# values end up in the Helm release record and in whatever file or shell
+# history supplied them. Never use this with a real tenant.
+# ----------------------------------------------------------------------------
+secrets:
+  create: false
+  postgresUrl: ""
+  stagingKey: ""
+  controllerToken: ""
+  s3AccessKey: ""
+  s3SecretKey: ""
+  entraCertificate: ""
+  entraClientSecret: ""
+  slackToken: ""
+
+# ----------------------------------------------------------------------------
+# Tenant-wide request budgets, in requests per second. The controller hands
+# them out and every egress proxy uses the same numbers as a ceiling, so the
+# chart sets both from here. The defaults are the conservative ones built
+# into the binary.
+# ----------------------------------------------------------------------------
+budgets:
+  graphRps: 40        # TAUT_BUDGET_GRAPH_RPS
+  sharepointRps: 20   # TAUT_BUDGET_SHAREPOINT_RPS
+  slackRps: 1         # TAUT_BUDGET_SLACK_RPS
+
+# OpenTelemetry, pushed over OTLP/gRPC from the controller, the workers and
+# the egress proxies. Empty endpoint: telemetry is off. There is no /metrics
+# endpoint to scrape, so the chart has no ServiceMonitor.
+telemetry:
+  # e.g. http://otel-collector.observability.svc:4317
+  endpoint: ""
+  # OTEL_METRIC_EXPORT_INTERVAL in milliseconds; empty keeps the SDK's 60000.
+  metricExportIntervalMs: ""
+  # Further standard OTEL_* variables (headers, TLS, resource attributes), as
+  # a list of Kubernetes env entries; valueFrom is allowed.
+  env: []
+
+# ----------------------------------------------------------------------------
+# Controller
+# ----------------------------------------------------------------------------
+controller:
+  # Keep this at 1. Finalize requests are serialized inside the process
+  # (see docs/OPERATIONS.md, section 1) and the tenant budgets are allocated from one process; two
+  # controllers would do each independently. The schema rejects more.
+  replicas: 1
+  port: 7070
+  service:
+    type: ClusterIP
+    port: 7070
+    annotations: {}
+  ingress:
+    enabled: false
+    className: ""
+    # `taut migrate` uploads the Slack export through the controller, so the
+    # ingress must accept very large request bodies without buffering them
+    # and must not time out long event streams. For ingress-nginx:
+    #   nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    #   nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+    #   nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    #   nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    annotations: {}
+    hosts: []
+    #  - host: taut.example.com
+    #    paths:
+    #      - path: /
+    #        pathType: Prefix
+    tls: []
+    #  - secretName: taut-tls
+    #    hosts: [taut.example.com]
+  podDisruptionBudget:
+    # With one replica this blocks node drains until the pod is deleted by
+    # hand. Off by default; a controller restart is harmless.
+    enabled: false
+    maxUnavailable: 0
+  serviceAccount:
+    create: true
+    name: ""
+    annotations: {}
+  terminationGracePeriodSeconds: 30
+  resources:
+    requests: { cpu: 100m, memory: 128Mi }
+    limits: { memory: 512Mi }
+  podAnnotations: {}
+  podLabels: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  priorityClassName: ""
+  extraEnv: []
+
+# ----------------------------------------------------------------------------
+# Workers. Each pod is three containers: the worker, its egress proxy and its
+# token broker.
+# ----------------------------------------------------------------------------
+worker:
+  replicas: 2
+  # Stages this Deployment works on: "all" or a comma-separated subset of
+  # plan,extract,transform,team,files,load,finalize,members.
+  stages: all
+  # Lanes one worker works on at once. TAUT_WORKER_CONCURRENCY
+  concurrency: 4
+  # Port of the worker's health endpoint (GET /healthz), used by the
+  # kubelet's probes only. TAUT_WORKER_HEALTH_ADDR
+  healthPort: 8081
+  scratch:
+    # Each worker keeps one decrypted copy of the export ZIP of every run it
+    # is working on. Size this to at least the largest export plus headroom;
+    # a pod that exceeds it is evicted (and the run carries on elsewhere).
+    sizeLimit: 20Gi
+    # "" for node disk, "Memory" for tmpfs (counts against the memory limit).
+    medium: ""
+  # On SIGTERM a worker hands its lanes back; the egress proxy then gets up
+  # to 10 seconds to finish requests in flight. A pod killed sooner loses
+  # nothing: its leases expire after 30 seconds and another worker resumes.
+  terminationGracePeriodSeconds: 60
+  autoscaling:
+    enabled: false
+    minReplicas: 2
+    maxReplicas: 8
+    targetCPUUtilizationPercentage: 70
+  podDisruptionBudget:
+    enabled: false
+    maxUnavailable: 1
+  serviceAccount:
+    create: true
+    name: ""
+    annotations: {}
+  resources:
+    requests: { cpu: 250m, memory: 256Mi }
+    limits: { memory: 1Gi }
+  podAnnotations: {}
+  podLabels: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  # Spread worker pods across nodes or zones. `labelSelector` is filled in
+  # when omitted.
+  topologySpreadConstraints: []
+  #  - maxSkew: 1
+  #    topologyKey: topology.kubernetes.io/zone
+  #    whenUnsatisfiable: ScheduleAnyway
+  priorityClassName: ""
+  extraEnv: []
+
+egressProxy:
+  # Loopback port inside the worker pod. The address is always 127.0.0.1.
+  port: 8900
+  # Destinations beyond the built-in ones (Microsoft Graph and SharePoint of
+  # every Microsoft cloud, Slack and its file hosts), as TAUT_PROXY_ALLOW
+  # entries: [scope=]host[:port]. Plain-http entries need dev.insecure.
+  extraAllow: []
+  # Per-channel message rate: starting value and ceiling. Empty keeps the
+  # binary's 1 and 5.
+  channelRps: ""
+  channelMax: ""
+  # The part of the Graph budget that message imports into chats may use
+  # (direct messages, target.directMessages.enabled). Microsoft allows an
+  # app fewer chat messages a second per tenant than channel messages (20
+  # against 50). Empty keeps the binary's 0.4: 16 a second of the default 40.
+  chatShare: ""
+  resources:
+    requests: { cpu: 50m, memory: 64Mi }
+    limits: { memory: 256Mi }
+  extraEnv: []
+
+# ----------------------------------------------------------------------------
+# Security contexts. The image runs as distroless "nonroot" (65532). The
+# token broker refuses a socket directory it does not own, and the egress
+# proxy must run as the same user to open the socket, so all containers share
+# one user.
+# ----------------------------------------------------------------------------
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 65532
+  runAsGroup: 65532
+  fsGroup: 65532
+  fsGroupChangePolicy: OnRootMismatch
+  seccompProfile:
+    type: RuntimeDefault
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  capabilities:
+    drop: [ALL]
+  seccompProfile:
+    type: RuntimeDefault
+
+# ----------------------------------------------------------------------------
+# NetworkPolicies. On by default: every pod of the release is denied all
+# traffic except what is listed here.
+#
+# Each dependency takes `to` (a list of NetworkPolicy peers: ipBlock,
+# namespaceSelector, podSelector) and `ports`. An empty `to` allows any
+# destination on those ports; fill it in to pin the dependency.
+#
+# A NetworkPolicy selects pods, not containers. Inside a worker pod the
+# worker, the egress proxy and the token broker share one network identity,
+# so the policy cannot stop the worker container from opening a connection
+# the egress proxy may open. What separates them is that only the token
+# broker can read a credential and only the egress proxy can obtain a token.
+# ----------------------------------------------------------------------------
+networkPolicy:
+  enabled: true
+  # Who may reach the controller's API: operators' workstations, a bastion,
+  # an ingress controller. NetworkPolicy peers. Empty: nobody (use
+  # `kubectl port-forward`, which most CNIs treat as node-local traffic).
+  controllerIngressFrom: []
+  #  - ipBlock: { cidr: 10.20.0.0/24 }
+  #  - namespaceSelector: { matchLabels: { kubernetes.io/metadata.name: ingress-nginx } }
+  # Where each dependency is, as NetworkPolicy peers. Fill these in.
+  #
+  # A dependency with an empty `to` is taken to be a public service: its
+  # rule allows public IPv4 addresses on its port and nothing else
+  # (workerExternalEgress.except is left out, as for the worker's own
+  # internet egress). So a Postgres, NATS, bucket or collector inside the
+  # cluster or on a private network is NOT reachable until its `to` says
+  # where it is, for example:
+  #
+  #   postgres:
+  #     to:
+  #       - namespaceSelector: { matchLabels: { kubernetes.io/metadata.name: databases } }
+  #         podSelector: { matchLabels: { app: postgres } }
+  #   s3:
+  #     to:
+  #       - ipBlock: { cidr: 10.20.30.40/32 }
+  #
+  # DNS is the exception: an empty `to` there allows any resolver.
+  dns:
+    to: []
+    ports: [53]
+  postgres:
+    to: []
+    ports: [5432]
+  nats:
+    to: []
+    ports: [4222]
+  s3:
+    to: []
+    ports: [443]
+  otlp:
+    to: []
+    ports: [4317]
+  # What the egress proxy and the token broker need: Microsoft Graph,
+  # SharePoint, the Entra sign-in endpoint and Slack. Neither Microsoft nor
+  # Slack offers a short, stable address list, so the default is any public
+  # IPv4 address on 443, excluding private, link-local (cloud metadata) and
+  # carrier-grade NAT ranges. Narrow `cidrs` if your egress goes through a
+  # proxy or NAT with known addresses.
+  workerExternalEgress:
+    cidrs:
+      - 0.0.0.0/0
+    except:
+      - 10.0.0.0/8
+      - 172.16.0.0/12
+      - 192.168.0.0/16
+      - 169.254.0.0/16
+      - 100.64.0.0/10
+    ports: [443]
+  # Extra raw egress rules appended to each policy.
+  controllerExtraEgress: []
+  workerExtraEgress: []
+  # With Cilium, replace the CIDR rule above with a CiliumNetworkPolicy that
+  # allows the worker pods to reach only the named hosts (toFQDNs). Needs
+  # Cilium's DNS proxy; `dnsSelector` must match the cluster's DNS pods.
+  cilium:
+    enabled: false
+    dnsSelector:
+      k8s:io.kubernetes.pod.namespace: kube-system
+      k8s:k8s-app: kube-dns
+    # Added to the hosts for the chosen cloud and Slack. matchName or
+    # matchPattern entries.
+    extraFQDNs: []
+
+# ----------------------------------------------------------------------------
+# INSECURE DEVELOPMENT TOGGLES. Nothing below takes effect, and rendering
+# fails if any of it is set, unless dev.insecure is true. With it true the
+# release notes print a warning. For a throwaway stack with fake Microsoft
+# and Slack services only.
+# ----------------------------------------------------------------------------
+dev:
+  insecure: false
+  # TAUT_CONTROLLER_INSECURE=1: the API accepts unauthenticated requests.
+  controllerInsecure: false
+  # TAUT_ALLOW_TEST_ENDPOINTS=1: config files may point at fake servers.
+  allowTestEndpoints: false
+  # TAUT_INSECURE_NO_SIDECARS=1: no token broker or egress proxy; the worker
+  # container holds the Microsoft and Slack credentials itself.
+  noSidecars: false
+  # TAUT_TOKEN_ALLOW_ENDPOINTS: extra sign-in or Graph origins the token
+  # broker may send the credential to.
+  tokenAllowEndpoints: []
+  # Endpoint overrides for the worker: TAUT_ENTRA_AUTHORITY, TAUT_GRAPH_URL,
+  # TAUT_SLACK_FILES_URL.
+  entraAuthority: ""
+  graphUrl: ""
+  slackFilesUrl: ""

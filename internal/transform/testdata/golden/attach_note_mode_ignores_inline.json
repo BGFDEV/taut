@@ -1,0 +1,26 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "Default mode.",
+    "files": [
+      {
+        "id": "F1",
+        "name": "a.png",
+        "title": "a.png",
+        "mimetype": "image/png",
+        "filetype": "pdf",
+        "size": 10,
+        "mode": "hosted",
+        "user": "U1",
+        "url_private": "https://files.slack.com/files-pri/T0-F1/f?t=xoxe-FAKE-1",
+        "url_private_download": "https://files.slack.com/files-pri/T0-F1/download/f?t=xoxe-FAKE-1",
+        "permalink": "https://acme.slack.com/files/U1/F1/f"
+      }
+    ]
+  },
+  "options": {
+    "inline_image_max": 100000
+  }
+}

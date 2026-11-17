@@ -1,0 +1,8 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "Unbalanced *bold, snake_case_name, 2*3*4, a~b, **double**, __init__, * spaced *, trailing_ and _leading"
+  }
+}

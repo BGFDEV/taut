@@ -1,0 +1,72 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "One of each.",
+    "files": [
+      {
+        "id": "F1",
+        "name": "report.pdf",
+        "title": "Quarterly <report> & \"notes\"",
+        "mimetype": "application/pdf",
+        "filetype": "pdf",
+        "size": 1234,
+        "mode": "hosted",
+        "user": "U1",
+        "url_private": "https://files.slack.com/files-pri/T0-F1/f?t=xoxe-FAKE-1",
+        "url_private_download": "https://files.slack.com/files-pri/T0-F1/download/f?t=xoxe-FAKE-1",
+        "permalink": "https://acme.slack.com/files/U1/F1/f"
+      },
+      {
+        "id": "F2",
+        "name": "shot.png",
+        "title": "Screen \"shot\" <1>",
+        "mimetype": "image/png",
+        "filetype": "pdf",
+        "size": 5000,
+        "mode": "hosted",
+        "user": "U1",
+        "url_private": "https://files.slack.com/files-pri/T0-F2/f?t=xoxe-FAKE-2",
+        "url_private_download": "https://files.slack.com/files-pri/T0-F2/download/f?t=xoxe-FAKE-2",
+        "permalink": "https://acme.slack.com/files/U1/F2/f"
+      },
+      {
+        "id": "F3",
+        "name": "FY24 Budget",
+        "title": "FY24 Budget",
+        "mode": "external",
+        "is_external": true,
+        "external_url": "https://docs.google.com/spreadsheets/d/FAKE/edit"
+      },
+      {
+        "id": "F4",
+        "title": "External without URL",
+        "mode": "external"
+      },
+      {
+        "id": "F5",
+        "mode": "hidden_by_limit"
+      },
+      {
+        "id": "F6",
+        "mode": "tombstone",
+        "name": "old.txt"
+      },
+      {
+        "id": "F7",
+        "name": "Launch plan",
+        "title": "Launch plan",
+        "mimetype": "application/vnd.slack-docs",
+        "filetype": "quip",
+        "size": 18442,
+        "mode": "space",
+        "url_private": "https://files.slack.com/files-pri/T0-F7/launch_plan?t=xoxe-FAKE"
+      }
+    ]
+  },
+  "options": {
+    "file_mode": "attach",
+    "inline_image_max": 100000
+  }
+}

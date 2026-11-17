@@ -1,0 +1,24 @@
+ ◆ taut audit ❯ verify                                           acme-migration
+ ──────────────────────────────────────────────────────────────────────────────
+ Verify
+
+ ✗ The audit log does not verify
+   stream load:C024BE91L: entry 18 does not match its hash
+   └ Do not rely on this audit trail as evidence. Keep the database as it is
+     and compare it with a backup; taut audit --stream <stream> lists the
+     affected chain.
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ──────────────────────────────────────────────────────────────────────────────
+ esc back · ↑/↓ scroll · ? help · q quit

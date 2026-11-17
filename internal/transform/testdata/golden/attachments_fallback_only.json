@@ -1,0 +1,20 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "subtype": "bot_message",
+    "bot_id": "B1",
+    "attachments": [
+      {
+        "id": 1,
+        "fallback": "Deploy *finished* <https://ci.example|here>",
+        "color": "danger"
+      },
+      {
+        "id": 2,
+        "color": "good"
+      }
+    ]
+  }
+}

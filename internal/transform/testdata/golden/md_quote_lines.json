@@ -1,0 +1,8 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "&gt; quoted *line*\n&gt; second\n&gt;\n&gt; after blank\nnot quoted\n> raw gt quote\nx &gt; y is not a quote"
+  }
+}

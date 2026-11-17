@@ -1,0 +1,87 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "Same file twice.",
+    "files": [
+      {
+        "id": "F1",
+        "name": "a.pdf",
+        "title": "a.pdf",
+        "mimetype": "application/pdf",
+        "filetype": "pdf",
+        "size": 1234,
+        "mode": "hosted",
+        "user": "U1",
+        "url_private": "https://files.slack.com/files-pri/T0-F1/f?t=xoxe-FAKE-1",
+        "url_private_download": "https://files.slack.com/files-pri/T0-F1/download/f?t=xoxe-FAKE-1",
+        "permalink": "https://acme.slack.com/files/U1/F1/f"
+      },
+      {
+        "id": "F2",
+        "name": "b.png",
+        "title": "b.png",
+        "mimetype": "image/png",
+        "filetype": "pdf",
+        "size": 10,
+        "mode": "hosted",
+        "user": "U1",
+        "url_private": "https://files.slack.com/files-pri/T0-F2/f?t=xoxe-FAKE-2",
+        "url_private_download": "https://files.slack.com/files-pri/T0-F2/download/f?t=xoxe-FAKE-2",
+        "permalink": "https://acme.slack.com/files/U1/F2/f"
+      },
+      {
+        "id": "F1",
+        "name": "a.pdf",
+        "title": "a.pdf",
+        "mimetype": "application/pdf",
+        "filetype": "pdf",
+        "size": 1234,
+        "mode": "hosted",
+        "user": "U1",
+        "url_private": "https://files.slack.com/files-pri/T0-F1/f?t=xoxe-FAKE-1",
+        "url_private_download": "https://files.slack.com/files-pri/T0-F1/download/f?t=xoxe-FAKE-1",
+        "permalink": "https://acme.slack.com/files/U1/F1/f"
+      },
+      {
+        "id": "F2",
+        "name": "b.png",
+        "title": "b.png",
+        "mimetype": "image/png",
+        "filetype": "pdf",
+        "size": 10,
+        "mode": "hosted",
+        "user": "U1",
+        "url_private": "https://files.slack.com/files-pri/T0-F2/f?t=xoxe-FAKE-2",
+        "url_private_download": "https://files.slack.com/files-pri/T0-F2/download/f?t=xoxe-FAKE-2",
+        "permalink": "https://acme.slack.com/files/U1/F2/f"
+      },
+      {
+        "id": "F3",
+        "name": "c.pdf",
+        "title": "c.pdf",
+        "mimetype": "application/pdf",
+        "filetype": "pdf",
+        "size": 3702,
+        "mode": "hosted",
+        "user": "U1",
+        "url_private": "https://files.slack.com/files-pri/T0-F3/f?t=xoxe-FAKE-3",
+        "url_private_download": "https://files.slack.com/files-pri/T0-F3/download/f?t=xoxe-FAKE-3",
+        "permalink": "https://acme.slack.com/files/U1/F3/f"
+      },
+      {
+        "id": "",
+        "name": "noid.txt"
+      },
+      {
+        "id": "",
+        "name": "noid.txt"
+      }
+    ]
+  },
+  "options": {
+    "file_mode": "attach",
+    "inline_image_max": 100000
+  }
+}

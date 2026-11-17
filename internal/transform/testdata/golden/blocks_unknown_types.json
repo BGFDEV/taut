@@ -1,0 +1,44 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "rich_text",
+        "elements": [
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "text",
+                "text": "Known content"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "actions",
+        "elements": []
+      },
+      {
+        "type": "input",
+        "label": {
+          "type": "plain_text",
+          "text": "Name"
+        }
+      },
+      {
+        "type": "carousel",
+        "elements": []
+      },
+      {
+        "type": "data_visualization"
+      },
+      {
+        "type": "<script>alert(1)</script>"
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+ ◆ taut audit ❯ entry                                            acme-migration
+ ──────────────────────────────────────────────────────────────────────────────
+ Entry  files:C024BE91L #3                                             3 of 60+
+
+ Stream          files:C024BE91L
+ Seq             3
+ Time            2026-11-14T09:01:18Z
+ Actor           worker-7f3a/2
+ Operation       file.fail
+ Outcome         ✗ error
+ Source ID       C024BE91L/F000045
+ Target ID       none
+ Content hash    9903336d4132e517ffd98e5ef89c4c08030c1e7988a8193528c11f5fb7700a
+                 da
+ Detail          slack: file was deleted before it could be downloaded
+ Previous hash   97c6abd8fdd6ed87af91a6db7a9a9f59c53b242c21312bb8a80cef3a4a00d0
+                 eb
+ Entry hash      92671c0ff4f03d6ad05fc2268cee357f64d88f1010456a2b39c480456f5b26
+                 cc
+
+
+
+ ──────────────────────────────────────────────────────────────────────────────
+ esc back · ←/→ prev/next · ↑/↓ scroll · ? help · q quit

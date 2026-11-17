@@ -1,0 +1,23 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "USLACKBOT",
+    "subtype": "tombstone",
+    "text": "This message was deleted.",
+    "hidden": true,
+    "reactions": [
+      {
+        "name": "+1",
+        "users": [
+          "U1",
+          "U2"
+        ],
+        "count": 7
+      }
+    ],
+    "edited": {
+      "ts": "1"
+    }
+  }
+}

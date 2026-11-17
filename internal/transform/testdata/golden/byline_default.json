@@ -1,0 +1,12 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "Hello from outside."
+  },
+  "options": {
+    "author_mapped": false,
+    "author_name": "Kai (Partner Co)"
+  }
+}

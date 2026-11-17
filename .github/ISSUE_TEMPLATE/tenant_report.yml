@@ -1,0 +1,58 @@
+name: Tenant report
+description: You ran Taut against a real Microsoft tenant; tell us how it went, good or bad
+labels: [tenant-report]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Taut is verified against fake Microsoft and Slack services. Reports from real tenants show where Microsoft Graph behaves differently from its documentation, and they are the most useful thing you can send.
+        **Remove real data before you post.** Counts and shapes are enough; no content, names, IDs or secrets.
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+    validations:
+      required: true
+  - type: dropdown
+    id: cloud
+    attributes:
+      label: Microsoft cloud
+      options:
+        - Global
+        - GCC / GCC High / DoD
+        - China (21Vianet)
+    validations:
+      required: true
+  - type: dropdown
+    id: strategy
+    attributes:
+      label: Load strategy
+      options:
+        - modern (the default)
+        - legacy
+    validations:
+      required: true
+  - type: textarea
+    id: size
+    attributes:
+      label: Rough size
+      description: Channels, messages, files, people, and whether private channels or direct messages were included.
+    validations:
+      required: true
+  - type: textarea
+    id: worked
+    attributes:
+      label: What worked
+  - type: textarea
+    id: differed
+    attributes:
+      label: Where Graph behaved differently from what Taut expected
+      description: Status codes, error codes and wording (redacted), throttling you saw, and which step it was.
+      render: text
+  - type: checkboxes
+    id: redacted
+    attributes:
+      label: Before submitting
+      options:
+        - label: I removed message content, identifiers and secrets from everything above.
+          required: true

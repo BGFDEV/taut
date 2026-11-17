@@ -1,0 +1,152 @@
+
+  ◆ taut preflight  fixture
+
+  Overview  1
+    Teams           1
+    Channels        12  (4 not migrated)
+    Messages        4,356  (1,409 replies in 210 threads)
+    Files           253  (3.4 GB)
+    Authors         40
+    Date range      4 Mar 2024 → 1 Jun 2024
+    Import time     4 min to 17 min
+    Load strategy   modern
+
+    Warnings
+    ! 11 authors with 663 messages have no Entra match. Their messages will be
+      attributed to former-member@fixture.example with the original name shown.
+      └ Review the People section. Map anyone who should keep their identity in
+        the override CSV (identity.overrides).
+
+    Notes
+    ● Reactions will be imported as Teams reactions (content.reactions: native).
+      This has not been run against a real tenant. Microsoft's import guide
+      lists reactions as in scope without showing the request, so Taut sends
+      them the way the chatMessage reference describes a reaction. If Graph
+      refuses the reactions of a message, Taut sends that message with its
+      reactions summarized in a line of text instead, as content.reactions:
+      footer does, and the audit log says so.
+      └ Import a channel into a test team first and look at it in Teams. To
+        summarize every reaction in text, set content.reactions to footer.
+
+  Plan  12
+    Fixture Corp  owner admin@fixture.example
+    Slack channel       Teams channel     Messages   Files   Note
+    ├─ #general         → General              980      55
+    ├─ #random          → random               636      50
+    ├─ #engineering     → engineering          501       9
+    ├─ #design          → design               351      23
+    ├─ #marketing       → marketing            406      32
+    ├─ #sales           → sales                315      12
+    ├─ #support         → support              298      14
+    ├─ #incidents       → incidents            208      14
+    ├─ #announcements   → announcements        178       7
+    ├─ #product         → product              220       5
+    ├─ #data            → data                 141      22
+    └─ #watercooler     → watercooler          122      10
+
+    Not migrated
+    Conversation                     Kind      Why
+    #leadership                      private   private channels are not included
+    #hiring                          private   private channels are not included
+    #security-reviews                private   private channels are not included
+    6 direct-message conversations   dm        direct messages are turned off
+
+  People  11
+    Slack users           40
+    Matched by email      29
+    Matched by override   0
+    Unmapped              11  (663 messages affected)
+    Policy                attribute to former-member@fixture.example, original name kept in the message
+
+    Unmapped
+    Name        Slack email                     Messages   Why
+    Grace       grace.fofana@partner.example         166   external or guest
+    Farid       farid.moreau@partner.example         165   external or guest
+    Tara        tara.quigley@fixture.example         105   email not in Entra
+    Liam        liam.abbott@fixture.example           49   email not in Entra
+    pagerbot    ○                                     42   bot or app
+    deploybot   ○                                     31   bot or app
+    standup     ○                                     29   bot or app
+    Hana        hana.ivanov@fixture.example           23   deactivated in Slack
+    Ivan        ivan.banerjee@fixture.example         22   deactivated in Slack
+    Jade        jade.ito@fixture.example              20   deactivated in Slack
+    Kofi        kofi.petrov@fixture.example           11   deactivated in Slack
+
+      └ To map someone by hand, add a row to the override CSV
+        (identity.overrides): slack_user_id,slack_email,entra
+
+  Content  7
+    Microsoft Graph cannot import everything Slack stores. This is what Taut
+    found and what it will do with each.
+
+    ●   294  Messages with reactions
+             Imported as Teams reactions from the people who have a Microsoft
+             365 account, up to 250 a message; the rest are summarized in a line
+             under the message. Not verified on a real tenant
+
+    ● 1,449  Reactions imported as Teams reactions
+             Each attributed to the person who gave it, dated like the message:
+             the export does not say when a reaction was given
+
+    ●   291  Reactions that cannot be Teams reactions
+             Custom emoji, people with no Microsoft 365 account and reactions
+             past the limit are counted in a line under the message
+
+    !   119  Edited messages
+             Final text is imported with an "edited" marker; edit history is not
+             available
+
+    ●   102  Bot and app messages
+             Attributed to the placeholder account with the bot's name shown
+
+    ●   157  @here / @channel / @everyone
+             Converted to plain text so the import notifies nobody
+
+    !    12  Join, leave and topic notices
+             Not migrated
+
+    ● transformed   ! information is lost
+
+  Estimate
+    Posts to import               4,356
+    At 5 requests/s per channel   4 min
+    At 1 request/s per channel    17 min
+    Limited by                    the largest channel, #general (980 posts)
+    Files to stage                3.4 GB
+
+    Largest channels
+    #general      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  980
+    #random       ━━━━━━━━━━━━━━━━━━━━━━━━━━──────────────  636
+    #engineering  ━━━━━━━━━━━━━━━━━━━━────────────────────  501
+    #marketing    ━━━━━━━━━━━━━━━━━───────────────────────  406
+    #design       ━━━━━━━━━━━━━━──────────────────────────  351
+    #sales        ━━━━━━━━━━━━━───────────────────────────  315
+    #support      ━━━━━━━━━━━━────────────────────────────  298
+    #product      ━━━━━━━━━───────────────────────────────  220
+
+    • Microsoft documents import limits of both 1 and 5 requests per second per
+      channel; the range reflects that.
+    • File transfer time depends on bandwidth and is not included.
+    • Microsoft's documentation says it may charge for import volume in future;
+      it publishes no figures.
+
+  Permissions
+    ✓ Teamwork.Migrate.All         Migration mode and importing messages with o…
+    ✓ User.Read.All                Identity mapping: matching Slack users to En…
+    ✓ Team.Create                  Creating teams (modern strategy)
+    ✓ Channel.Create               Creating channels (modern strategy)
+    ✓ TeamMember.ReadWrite.All     Adding owners and members at taut finalize
+    ✓ ChannelMessage.Read.All      Reading imported messages back, to resume wi…
+    ✓ Files.ReadWrite.All          Creating channel folders and uploading small…
+    ✓ Sites.ReadWrite.All          Uploading large files in resumable sessions
+    ○ ChannelMember.ReadWrite.All  not needed for this config file
+    ○ Chat.Create                  not needed for this config file
+    ○ Chat.ReadBasic.All           not needed for this config file
+    ○ Chat.Read.All                not needed for this config file
+    ✓ Organization.Read.All        Showing the tenant name and verified domains…
+    ✓ Team.ReadBasic.All           Detecting team name collisions in taut prefl…
+    ✓ Channel.ReadBasic.All        Detecting channel name collisions in taut pr…
+
+  ! Ready, with 1 warning · 12 channels · 4,356 messages · about 17 min to import
+
+  Next  taut migrate  run the migration

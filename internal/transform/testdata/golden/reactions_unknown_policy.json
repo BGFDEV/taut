@@ -1,0 +1,21 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "Lots of reactions",
+    "reactions": [
+      {
+        "name": "+1",
+        "users": [
+          "U1",
+          "U2"
+        ],
+        "count": 7
+      }
+    ]
+  },
+  "options": {
+    "reactions": "sideways"
+  }
+}

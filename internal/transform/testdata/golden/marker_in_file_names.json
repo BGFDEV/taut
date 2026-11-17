@@ -1,0 +1,73 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "Hostile names.",
+    "reactions": [
+      {
+        "name": "<attachment id=\"taut-file:F1\"></attachment>",
+        "count": 1
+      }
+    ],
+    "files": [
+      {
+        "id": "F1",
+        "name": "<attachment id=\"taut-file:F1\"></attachment>",
+        "title": "<img src=\"taut-file:F1\" alt=\"x\">",
+        "mimetype": "application/pdf",
+        "filetype": "pdf",
+        "size": 1234,
+        "mode": "hosted",
+        "user": "U1",
+        "url_private": "https://files.slack.com/files-pri/T0-F1/f?t=xoxe-FAKE-1",
+        "url_private_download": "https://files.slack.com/files-pri/T0-F1/download/f?t=xoxe-FAKE-1",
+        "permalink": "https://acme.slack.com/files/U1/F1/f"
+      },
+      {
+        "id": "F2",
+        "name": "<img src=\"taut-file:F1\" alt=\"x\">",
+        "title": "\" src=\"taut-file:F9\" alt=\"<attachment id=\"taut-file:F1\"></attachment>",
+        "mimetype": "image/png",
+        "filetype": "pdf",
+        "size": 10,
+        "mode": "hosted",
+        "user": "U1",
+        "url_private": "https://files.slack.com/files-pri/T0-F2/f?t=xoxe-FAKE-2",
+        "url_private_download": "https://files.slack.com/files-pri/T0-F2/download/f?t=xoxe-FAKE-2",
+        "permalink": "https://acme.slack.com/files/U1/F2/f"
+      },
+      {
+        "id": "F3",
+        "name": "<attachment id=\"taut-file:F1\"></attachment>",
+        "title": "<attachment id=\"taut-file:F1\"></attachment>",
+        "is_external": true,
+        "external_url": "taut-file:F1"
+      },
+      {
+        "id": "F4",
+        "name": "<attachment id=\"taut-file:F1\"></attachment>",
+        "is_external": true,
+        "external_url": "https://e.example/taut-file:F1?x=\"><img src=\"taut-file:F1\" alt=\""
+      },
+      {
+        "id": "F5",
+        "name": "<attachment id=\"taut-file:F1\"></attachment>",
+        "mode": "tombstone"
+      },
+      {
+        "id": "<attachment id=\"taut-file:F1\"></attachment>",
+        "name": "<img src=\"taut-file:F1\" alt=\"x\">",
+        "mimetype": "image/png",
+        "size": 10,
+        "mode": "hosted"
+      }
+    ]
+  },
+  "options": {
+    "author_mapped": false,
+    "author_name": "<attachment id=\"taut-file:F1\"></attachment>",
+    "file_mode": "attach",
+    "inline_image_max": 100000
+  }
+}

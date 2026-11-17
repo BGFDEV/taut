@@ -1,0 +1,91 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "Bad IDs.",
+    "files": [
+      {
+        "id": "",
+        "name": "empty id",
+        "mimetype": "image/png",
+        "size": 10,
+        "mode": "hosted"
+      },
+      {
+        "id": "F1\"></attachment><script>alert(1)</script>",
+        "name": "quote breakout",
+        "mimetype": "image/png",
+        "size": 10,
+        "mode": "hosted"
+      },
+      {
+        "id": "F 1",
+        "name": "space",
+        "mimetype": "image/png",
+        "size": 10,
+        "mode": "hosted"
+      },
+      {
+        "id": "F1\u0000",
+        "name": "nul",
+        "mimetype": "image/png",
+        "size": 10,
+        "mode": "hosted"
+      },
+      {
+        "id": "taut-file:F1",
+        "name": "prefix",
+        "mimetype": "image/png",
+        "size": 10,
+        "mode": "hosted"
+      },
+      {
+        "id": "F1/../F2",
+        "name": "path",
+        "mimetype": "image/png",
+        "size": 10,
+        "mode": "hosted"
+      },
+      {
+        "id": "É1",
+        "name": "non-ascii",
+        "mimetype": "image/png",
+        "size": 10,
+        "mode": "hosted"
+      },
+      {
+        "id": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+        "name": "too long",
+        "mimetype": "image/png",
+        "size": 10,
+        "mode": "hosted"
+      },
+      {
+        "id": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+        "name": "longest valid",
+        "mimetype": "image/png",
+        "size": 10,
+        "mode": "hosted"
+      },
+      {
+        "id": "f_1-A",
+        "name": "valid punctuation",
+        "mimetype": "image/png",
+        "size": 10,
+        "mode": "hosted"
+      },
+      {
+        "id": "F1\n",
+        "name": "newline",
+        "mimetype": "image/png",
+        "size": 10,
+        "mode": "hosted"
+      }
+    ]
+  },
+  "options": {
+    "file_mode": "attach",
+    "inline_image_max": 100000
+  }
+}

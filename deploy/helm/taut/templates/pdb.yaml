@@ -1,0 +1,17 @@
+{{- range $component := list "controller" "worker" }}
+{{- $pdb := (index $.Values $component).podDisruptionBudget }}
+{{- if $pdb.enabled }}
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "taut.fullname" $ }}-{{ $component }}
+  labels:
+    {{- include "taut.labels" (dict "root" $ "component" $component) | nindent 4 }}
+spec:
+  maxUnavailable: {{ $pdb.maxUnavailable }}
+  selector:
+    matchLabels:
+      {{- include "taut.selectorLabels" (dict "root" $ "component" $component) | nindent 6 }}
+{{- end }}
+{{- end }}

@@ -1,0 +1,30 @@
+  ◆ taut map                                                                        acme-migration
+  ────────────────────────────────────────────────────────────────────────────────────────────────
+     - Acme Corp  2 channels  owner admin@acme.example
+     ├─ #general → General    empty
+     └─ #random             37 days
+     - Sales  1 channel  owner admin@acme.example
+     └─ #sales-emea         74 days
+     - Direct messages  6
+     ├─ Ada Abbott, Ben Banerjee                migrates
+  ❯  ├─ Ada Abbott, Ben Banerjee, Chloe Castro  migrates
+     ├─ Ada Abbott (alone)                      skipped: a conversation with oneself
+     ├─ Ada Abbott, deploybot                   skipped: a participant is a bot or an app
+     ├─ Ben Banerjee, Farid Fofana              skipped: a participant is a guest in Slack
+     └─ Chloe Castro, Grace Garcia              skipped: a participant's Slack account is deactiv…
+
+
+
+
+
+
+
+
+
+
+
+
+  ○ Direct messages cannot be edited here: who is in a conversation decides whether it migrates
+  3 channels in 2 teams, 2 of 6 direct messages into chats
+  ────────────────────────────────────────────────────────────────────────────────────────────────
+  space toggle · r rename · m move · / filter · u undo · s save · ? help · q quit

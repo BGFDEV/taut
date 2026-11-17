@@ -1,0 +1,50 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "header",
+        "text": {
+          "type": "plain_text",
+          "text": "Deploy finished"
+        }
+      },
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "Build *#42* passed"
+        },
+        "fields": [
+          {
+            "type": "mrkdwn",
+            "text": "*Env*\nprod"
+          }
+        ]
+      },
+      {
+        "type": "context",
+        "elements": [
+          {
+            "type": "mrkdwn",
+            "text": "by <@U2>"
+          }
+        ]
+      },
+      {
+        "type": "actions",
+        "elements": [
+          {
+            "type": "button",
+            "text": {
+              "type": "plain_text",
+              "text": "Open"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

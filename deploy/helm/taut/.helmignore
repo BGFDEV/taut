@@ -1,0 +1,7 @@
+.DS_Store
+.git/
+*.swp
+*.bak
+*.tmp
+# CI value sets and the render checks are not part of the packaged chart.
+ci/

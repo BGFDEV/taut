@@ -1,0 +1,24 @@
+ ◆ taut map                                                      acme-migration
+ ──────────────────────────────────────────────────────────────────────────────
+    - Acme Corp  7 channels  owner admin@acme.example
+    ├─ #general → General                   empty
+ ❯  ├─ #engineering                       74 days
+    ├─ #design                           111 days
+    ├─ #_archive → archive                28 days  ! cannot start with an unde…
+    ├─ #forms → forms-channel             65 days  ! is a reserved name in Tea…
+    ├─ #proj-very-long-very-long-very-…  102 days  ! is longer than 50 charact…
+    └─ #old-project                       19 days  archived
+    - Sales  2 channels  owner admin@acme.example
+    ├─ #sales-emea                        56 days
+    └─ #sales-apac                        93 days
+    - Not migrating  3
+  • ├─ #random                         not selected by any team's include/excl…
+    ├─ #leadership                     private channels are not included
+    └─ 2 direct-message conversations  direct messages are turned off
+
+
+
+ ! 1 unsaved change. Save before quitting?
+ 1 unsaved change · 9 channels in 2 teams, 3 not migrating
+ ──────────────────────────────────────────────────────────────────────────────
+ s save · d discard · esc keep editing · ? help · q quit

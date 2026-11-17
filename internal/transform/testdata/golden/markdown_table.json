@@ -1,0 +1,13 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "markdown",
+        "text": "| Name | Qty | Price |\n|:-----|:---:|------:|\n| **Widget** | 2 | $3.50 |\n| `gizmo` \\| pipe | | [buy](https://shop.example/g) |\n| short |\n\nafter the table\n\nnot | a table\n\na | b\n---\n"
+      }
+    ]
+  }
+}

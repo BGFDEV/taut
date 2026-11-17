@@ -1,0 +1,40 @@
+  ◆ taut dashboard ❯ load #incidents                                                                                        acme-migration
+  ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  ⠋ Importing · run 01JCM4Q8 · 12m 12s elapsed · ETA 9m+ · 13 failed · 2 held
+
+   Problem  load:Cincidents
+  ✗ load #incidents failed · 5 attempts
+
+  Error
+    Graph refused the message: 403 Forbidden. The app registration lacks Teamwork.Migrate.All for this team, or admin consent was
+    withdrawn while the run was in progress.
+
+  Audit log errors  3
+    11:59:30  ✗ message.import           Cincidents/1699000077.000400
+                403 Forbidden: Teamwork.Migrate.All is not granted
+    11:59:00  ✗ message.import           Cincidents/1699000077.000400
+                403 Forbidden: Teamwork.Migrate.All is not granted
+    11:58:02  ✗ message.fail             Cincidents/1699000050.000300
+                413 Request Entity Too Large: the message body is 4.2 MB after its inline images were embedded; the limit is 4 MB
+
+  Recent activity  last 10 minutes, newest first
+    11:58:01  ✓ message.import           Cincidents/1699000041.000200 → 1699000041000
+    11:58:00  ✓ message.import           Cincidents/1699000000.000100 → 1699000000000
+    11:53:22  ✓ channel.start_migration  Cincidents → 19:8a1f@thread.tacv2
+    11:53:20  ✓ channel.create           Cincidents → 19:8a1f@thread.tacv2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  ↑/↓ scroll · r retry failed lanes · esc back · ? help · q quit

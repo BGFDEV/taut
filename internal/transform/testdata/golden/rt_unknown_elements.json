@@ -1,0 +1,77 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "rich_text",
+        "block_id": "b1",
+        "elements": [
+          {
+            "type": "rich_text_section",
+            "elements": [
+              {
+                "type": "text",
+                "text": "a "
+              },
+              {
+                "type": "sparkle",
+                "text": "unknown with text"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "sparkle",
+                "fallback": "unknown with fallback"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "sparkle",
+                "url": "https://x.example/u"
+              },
+              {
+                "type": "text",
+                "text": " "
+              },
+              {
+                "type": "sparkle"
+              },
+              "not an object",
+              7,
+              null,
+              [
+                1
+              ],
+              {
+                "text": "no type"
+              }
+            ]
+          },
+          {
+            "type": "rich_text_mystery",
+            "elements": [
+              {
+                "type": "text",
+                "text": "mystery container"
+              }
+            ]
+          },
+          {
+            "type": "rich_text_mystery2",
+            "text": "container with text"
+          },
+          "junk",
+          {
+            "type": "a very long type name that goes on and on and on and on and on <script>"
+          }
+        ]
+      }
+    ]
+  }
+}

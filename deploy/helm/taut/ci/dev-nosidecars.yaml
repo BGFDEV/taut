@@ -1,0 +1,4 @@
+# The worker holds the credentials itself. Throwaway tests only.
+dev:
+  insecure: true
+  noSidecars: true

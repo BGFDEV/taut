@@ -1,0 +1,176 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "container",
+        "title": {
+          "type": "plain_text",
+          "text": "Bulk update"
+        },
+        "subtitle": {
+          "type": "mrkdwn",
+          "text": "_Review_ first"
+        },
+        "child_blocks": [
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*DCW-1024* Status: Open → Closed"
+            }
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "type": "table",
+            "rows": [
+              [
+                {
+                  "type": "raw_text",
+                  "text": "k"
+                },
+                {
+                  "type": "raw_text",
+                  "text": "v"
+                }
+              ]
+            ]
+          },
+          {
+            "type": "container",
+            "rich_text_title": {
+              "type": "rich_text",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "Level 2"
+                    }
+                  ]
+                }
+              ]
+            },
+            "child_blocks": [
+              {
+                "type": "container",
+                "title": {
+                  "type": "plain_text",
+                  "text": "Level 3"
+                },
+                "child_blocks": [
+                  {
+                    "type": "container",
+                    "title": {
+                      "type": "plain_text",
+                      "text": "Level 4"
+                    },
+                    "child_blocks": [
+                      {
+                        "type": "container",
+                        "title": {
+                          "type": "plain_text",
+                          "text": "Level 5"
+                        },
+                        "child_blocks": [
+                          {
+                            "type": "rich_text",
+                            "elements": [
+                              {
+                                "type": "rich_text_section",
+                                "elements": [
+                                  {
+                                    "type": "text",
+                                    "text": "too deep"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "plan",
+        "title": "Thinking <completed>",
+        "tasks": [
+          {
+            "task_id": "1",
+            "title": "Fetched profile",
+            "status": "in_progress"
+          },
+          {
+            "task_id": "2",
+            "title": "Generated report",
+            "status": "complete",
+            "details": {
+              "type": "rich_text",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "Looked at 3 sources"
+                    }
+                  ]
+                }
+              ]
+            },
+            "output": {
+              "type": "rich_text",
+              "elements": [
+                {
+                  "type": "rich_text_section",
+                  "elements": [
+                    {
+                      "type": "text",
+                      "text": "15 data points"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "junk"
+        ]
+      },
+      {
+        "type": "task_card",
+        "task_id": "t",
+        "title": "Weather",
+        "status": "error<script>",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://weather.example/",
+            "text": "weather.example"
+          },
+          {
+            "type": "url",
+            "url": "javascript:alert(1)",
+            "text": "bad"
+          },
+          {
+            "type": "url",
+            "url": "https://files.slack.com/files-pri/T0-F1/x?t=xoxe-SECRET",
+            "text": "leak"
+          },
+          null
+        ]
+      }
+    ]
+  }
+}

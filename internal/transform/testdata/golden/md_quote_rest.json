@@ -1,0 +1,8 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "intro\n&gt;&gt;&gt; everything after\nis quoted\n\n&gt; even this\n```code in quote```"
+  }
+}

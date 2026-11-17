@@ -1,0 +1,46 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "subtype": "bot_message",
+    "bot_id": "B1",
+    "text": "Deploy report",
+    "attachments": [
+      {
+        "id": 1,
+        "color": "36a64f",
+        "fallback": "fallback is not shown",
+        "pretext": "Pretext with *bold*",
+        "author_name": "CI &amp; CD",
+        "title": "Run 9 &lt;main&gt;",
+        "title_link": "https://ci.example/run/9",
+        "text": "Deploy *finished* in <https://ci.example/run/9|run 9>\n&gt; quoted log",
+        "fields": [
+          {
+            "title": "Status",
+            "value": "ok :white_check_mark:",
+            "short": true
+          },
+          {
+            "title": "Owner",
+            "value": "<@U1>"
+          },
+          {
+            "value": "no title"
+          }
+        ],
+        "footer": "ci.example | <!date^1709546400^{date}|Mar 4>",
+        "image_url": "https://files.slack.com/img.png?t=xoxe-FAKE",
+        "mrkdwn_in": [
+          "text"
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Second, no link",
+        "text": "body"
+      }
+    ]
+  }
+}

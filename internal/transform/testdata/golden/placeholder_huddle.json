@@ -1,0 +1,14 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "USLACKBOT",
+    "subtype": "huddle_thread",
+    "text": "A huddle started"
+  },
+  "options": {
+    "author_mapped": false,
+    "author_name": "Slackbot",
+    "author_kind": "bot"
+  }
+}

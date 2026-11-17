@@ -1,0 +1,32 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "Nobody can react natively",
+    "reactions": [
+      {
+        "name": "partyparrot",
+        "users": [
+          "U1"
+        ],
+        "count": 1
+      },
+      {
+        "name": "tada",
+        "users": [
+          "U3",
+          "U5"
+        ],
+        "count": 2
+      },
+      {
+        "name": "eyes",
+        "count": 2
+      }
+    ]
+  },
+  "options": {
+    "reactions": "native"
+  }
+}

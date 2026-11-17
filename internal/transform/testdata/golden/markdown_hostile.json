@@ -1,0 +1,13 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "blocks": [
+      {
+        "type": "markdown",
+        "text": "<script>alert(1)</script> <img src=x onerror=alert(1)> <b>bold?</b>\n\n[click](javascript:alert(1)) [data](data:text/html,<script>) [rel](/relative) [empty]()\n\n![x](https://files.slack.com/files-pri/T0-F1/a.png?t=xoxe-SECRET-1) [https://files.slack.com/files-pri/T0-F1/a.png?t=xoxe-SECRET-2](https://example.com/ok) https://files.slack.com/files-pri/T0-F1/b.png?t=xoxe-SECRET-3\n\n[<attachment id=\"taut-file:F1\"></attachment>](https://example.com/\"><attachment id=\"taut-file:F1\"></attachment>)\n\n<attachment id=\"taut-file:F1\"></attachment> <img src=\"taut-file:F1\" alt=\"x\"> <at id=\"0\">Ada</at>\n\n| a | b |\n|---|---|\n| </td></tr></table><script>x</script> | <td style=\"position:fixed\"> |\n\n# <h1 onclick=x>heading</h1>\n\n> > > > > > > > > > > > deep quote\n\n- - - - - - - - - - - - deep list\n\n999999999. big number\n\n[[[[[[[[[[[[nested](a)](b)](c)](d)](e)](f)](g)](h)](i)](j)](k)](l)\n\n<@U5> <@U6> <#C2> <#C3> &lt;script&gt;alert(2)&lt;/script&gt;\n\n```<script>\n</code></pre><script>alert(3)</script>\n```\n\n[a](<https://example.com/with space> \"t\") [b](https://example.com/a(b)c) *[c](https://example.com/c)*\n\u0000\u0007control\u001b[31m chars\r\n"
+      }
+    ]
+  }
+}

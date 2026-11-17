@@ -1,0 +1,41 @@
+
+  ◆ taut map  fixture
+
+  Fixture Corp  15 channels  owner admin@fixture.example
+  ├─ #general → General                   1 day
+  ├─ #_archive → archive                  1 day   ! cannot start with an unders…
+  ├─ #forms → forms-channel               1 day   ! is a reserved name in Teams
+  ├─ #con → con-channel                   1 day   ! is a reserved name in Teams
+  ├─ #proj-very-long-very-long-very-l…    1 day   ! is longer than 50 characters
+  ├─ #old-project                        2 days   archived
+  ├─ #empty-room                          empty
+  ├─ #megathread                         3 days
+  ├─ #collisions                          1 day
+  ├─ #people                              1 day
+  ├─ #files                               1 day
+  ├─ #unicode                             1 day
+  ├─ #subtypes                            1 day
+  ├─ #mrkdwn                              1 day
+  └─ #malformed                          2 days
+
+  Not migrating  1
+  Conversation    Kind      Why
+  #secret-plans   private   private channels are not included
+
+  Direct messages  9
+  Participants              Kind   Into a Teams chat
+  Ada, Ben                  dm     migrates
+  Ada, Ben, Dev             mpim   migrates
+  Ada, Chloe                dm     migrates
+  Dev, Елена 🌻 (she/her)   dm     migrates
+  Ada (alone)               dm     skipped: a conversation with oneself
+  Ada, Ben, Jonas           mpim   skipped: a participant belongs to another or…
+  Ada, Farid                dm     skipped: a participant is a guest in Slack
+  Ada, Grace                dm     skipped: a participant's Slack account is de…
+  Ada, buildbot             dm     skipped: a participant is a bot or an app
+    └ Decided from the export alone. taut preflight also checks that each
+      participant has a Microsoft 365 account.
+
+  ✓ 15 channels in 1 team, 1 not migrating, 4 of 9 direct messages into chats
+
+  Next  taut preflight  check this plan

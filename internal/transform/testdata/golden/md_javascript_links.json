@@ -1,0 +1,8 @@
+{
+  "message": {
+    "type": "message",
+    "ts": "1709546400.000100",
+    "user": "U1",
+    "text": "<javascript:alert(1)|click> <JaVaScRiPt:alert(1)> <data:text/html;base64,AAAA|d> <java\tscript:alert(1)|tab> <file:///etc/passwd> <//evil.example/x|rel> <vbscript:x|v> < javascript:alert(1)|sp>"
+  }
+}

@@ -1,0 +1,19 @@
+
+  ◆ taut dashboard  fixture
+
+  ✓ Planned               3 channels
+  ✓ Read the export       90 of 90 days
+  ✓ Converted messages    90 of 90 days
+  ✓ Created teams         1 of 1
+  ◌ Moving files          56 of 72 files, 350 MB of 480 MB
+  ✗ Importing into Teams  52 of 90, 1 lane failed
+
+  ✗ load:C09ZZ81AB failed: Graph refused the message: 403 Forbidden
+
+  Workers      none at work
+  Throttling   clear · none in the last 5 min
+  Run          run-2026-11-14-d3c4b5
+
+  ✗ Import stopped · 3,310 posts · 3 channels
+
+  Next  taut migrate  resume where it stopped; no message is ever imported twice

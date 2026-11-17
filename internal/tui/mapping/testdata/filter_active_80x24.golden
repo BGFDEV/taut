@@ -1,0 +1,24 @@
+ ◆ taut map                                                      acme-migration
+ ──────────────────────────────────────────────────────────────────────────────
+    - Sales  2 channels  owner admin@acme.example
+ ❯  ├─ #sales-emea                        56 days
+    └─ #sales-apac                        93 days
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ Filter sales
+ filter sales · 10 channels in 2 teams, 2 not migrating
+ ──────────────────────────────────────────────────────────────────────────────
+ enter apply · esc cancel · ? help · q quit

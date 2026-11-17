@@ -1,0 +1,122 @@
+
+  ◆ taut preflight  fixture
+
+  Overview  2
+    Pass            2  (63 messages already in Teams)
+    Teams           1
+    Channels        4  (1 not migrated)
+    New messages    33  (7 replies in 1 thread)
+    New files       3  (42.5 KB)
+    Authors         7
+    Date range      4 Mar 2024 → 10 Mar 2024
+    Import time     under a minute
+    Load strategy   modern
+
+    Warnings
+    ! 1 author with 1 message have no Entra match. Their messages will be
+      attributed to former-member@fixture.example with the original name shown.
+      └ Review the People section. Map anyone who should keep their identity in
+        the override CSV (identity.overrides).
+    ! 2 messages already in Teams were edited in Slack since, and 2 messages
+      already in Teams are no longer in the export. Teams keeps them as they
+      were imported: Microsoft Graph's import API can add messages, and cannot
+      change or remove one.
+      └ Nothing to do in Taut. If a removed message must not stay in Teams,
+        delete it there as the channel's owner.
+
+  Incremental  33
+    Pass               2, following run RUN-ID (still in migration mode)
+    Workspace          T0FIXTURE  (3 of 3 conversations migrated earlier are in this export)
+    Already in Teams   63 messages, 1 file, 3 conversations
+
+    This pass adds
+    Messages   33  (7 replies, 4 to threads migrated earlier)
+    Files      3  (42.5 KB)
+    Channels   1
+    People     2
+
+    Not carried over
+    Edited since    2  Teams keeps the text that was imported
+    Deleted since   2  they stay in Teams
+    Microsoft Graph's import API adds messages. It cannot change or remove one
+    that was imported.
+
+    Slack channel    In Teams   New   Edited / deleted   Note
+    #general               19    12              1 / 1
+    #random                19    15              1 / 1
+    #launch-review          0     6                      new channel
+
+  Plan  4
+    Fixture Corp  owner admin@fixture.example
+    Slack channel       Teams channel     Messages   Files   Note
+    ├─ #general         → General               12       2
+    ├─ #random          → random                15       1
+    ├─ #project-atlas   → project-atlas          0       0
+    └─ #launch-review   → launch-review          6       0
+
+    Not migrated
+    Conversation                     Kind   Why
+    2 direct-message conversations   dm     direct messages are turned off
+
+  People  1
+    Slack users           7
+    Matched by email      6
+    Matched by override   0
+    Unmapped              1  (1 message affected)
+    Policy                attribute to former-member@fixture.example, original name kept in the message
+
+    Unmapped
+    Name   Slack email                 Messages   Why
+    Otto   otto.lind@fixture.example          1   email not in Entra
+
+      └ To map someone by hand, add a row to the override CSV
+        (identity.overrides): slack_user_id,slack_email,entra
+
+  Content  1
+    Microsoft Graph cannot import everything Slack stores. This is what Taut
+    found and what it will do with each.
+
+    ● 4  @here / @channel / @everyone
+         Converted to plain text so the import notifies nobody
+
+    ● transformed   ! information is lost
+
+  Estimate
+    Posts to import               33
+    At 5 requests/s per channel   under a minute
+    At 1 request/s per channel    under a minute
+    Limited by                    the largest channel, #random (15 posts)
+    Files to stage                42.5 KB
+
+    Largest channels
+    #random         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  15
+    #general        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━────────  12
+    #launch-review  ━━━━━━━━━━━━━━━━────────────────────────  6
+    #project-atlas  ────────────────────────────────────────  0
+
+    • Microsoft documents import limits of both 1 and 5 requests per second per
+      channel; the range reflects that.
+    • File transfer time depends on bandwidth and is not included.
+    • Microsoft's documentation says it may charge for import volume in future;
+      it publishes no figures.
+
+  Permissions
+    ✓ Teamwork.Migrate.All         Migration mode and importing messages with o…
+    ✓ User.Read.All                Identity mapping: matching Slack users to En…
+    ✓ Team.Create                  Creating teams (modern strategy)
+    ✓ Channel.Create               Creating channels (modern strategy)
+    ✓ TeamMember.ReadWrite.All     Adding owners and members at taut finalize
+    ✓ ChannelMessage.Read.All      Reading imported messages back, to resume wi…
+    ✓ Files.ReadWrite.All          Creating channel folders and uploading small…
+    ✓ Sites.ReadWrite.All          Uploading large files in resumable sessions
+    ○ ChannelMember.ReadWrite.All  not needed for this config file
+    ○ Chat.Create                  not needed for this config file
+    ○ Chat.ReadBasic.All           not needed for this config file
+    ○ Chat.Read.All                not needed for this config file
+    ✓ Organization.Read.All        Showing the tenant name and verified domains…
+    ✓ Team.ReadBasic.All           Detecting team name collisions in taut prefl…
+    ✓ Channel.ReadBasic.All        Detecting channel name collisions in taut pr…
+
+  ! Ready, with 2 warnings · pass 2 · 33 new messages · 63 messages already in Teams · about under a minute to import
+
+  Next  taut migrate --incremental  import what is new
